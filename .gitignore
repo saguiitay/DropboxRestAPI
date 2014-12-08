@@ -5,15 +5,17 @@
 *.suo
 *.user
 *.sln.docstates
+*.DotSettings
 
 # Build results
 
 [Dd]ebug/
 [Rr]elease/
 x64/
-build/
 [Bb]in/
 [Oo]bj/
+[Ww]orking/
+Build/runbuild.txt
 
 # Enable "build/" folder in the NuGet Packages folder since NuGet packages use it for MSBuild targets
 !packages/*/build/
@@ -128,10 +130,6 @@ Backup*/
 UpgradeLog*.XML
 UpgradeLog*.htm
 
-# SQL Server files
-App_Data/*.mdf
-App_Data/*.ldf
-
 
 #LightSwitch generated files
 GeneratedArtifacts/
@@ -154,13 +152,7 @@ $RECYCLE.BIN/
 
 # Mac desktop service store files
 .DS_Store
-/src/packages/Microsoft.Bcl.1.1.9
-/src/packages/Microsoft.Bcl.Build.1.0.14
-/src/packages/Microsoft.Net.Http.2.2.22
-/src/packages/Microsoft.Net.Http.2.2.27-beta
-/src/packages/Newtonsoft.Json.6.0.4
-/src/packages/Newtonsoft.Json.6.0.1
-/src/packages/OneDriveRestAPI.1.0.0
-/src/packages/OneDriveRestAPI.1.0.1
-/src/NuGet.Package
-/src/packages/Microsoft.Net.Http.2.2.28
+
+#NuGet
+packages
+!packages/repositories.config

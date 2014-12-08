@@ -5,16 +5,12 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DropboxRestAPI", "DropboxRestAPI\DropboxRestAPI.csproj", "{FA69B792-FCFF-4CB1-8435-798112337306}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuGet.Package", "NuGet.Package\NuGet.Package.csproj", "{0451BAEF-DF2E-4B98-8644-94EE9415E389}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E98E3C5F-923F-43C8-9DF1-9E481B00CDDC}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A1563ED0-2609-4CB0-8BEB-E0B4485C2B9A}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample", "Sample\Sample.csproj", "{76D6681F-4BD6-48E0-BE15-775BE0F41F17}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,13 +22,6 @@ Global
 		{FA69B792-FCFF-4CB1-8435-798112337306}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA69B792-FCFF-4CB1-8435-798112337306}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA69B792-FCFF-4CB1-8435-798112337306}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0451BAEF-DF2E-4B98-8644-94EE9415E389}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0451BAEF-DF2E-4B98-8644-94EE9415E389}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0451BAEF-DF2E-4B98-8644-94EE9415E389}.Release|Any CPU.Build.0 = Release|Any CPU
-		{76D6681F-4BD6-48E0-BE15-775BE0F41F17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{76D6681F-4BD6-48E0-BE15-775BE0F41F17}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{76D6681F-4BD6-48E0-BE15-775BE0F41F17}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{76D6681F-4BD6-48E0-BE15-775BE0F41F17}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

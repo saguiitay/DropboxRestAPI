@@ -24,7 +24,6 @@
 
 
 using System;
-using System.Runtime.Serialization;
 
 namespace DropboxRestAPI.Models.Exceptions
 {
@@ -49,11 +48,6 @@ namespace DropboxRestAPI.Models.Exceptions
             : base(message, innerException)
         {
             Code = code;
-        }
-
-        protected ServiceErrorException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
         }
 
         public int Code { get; set; }

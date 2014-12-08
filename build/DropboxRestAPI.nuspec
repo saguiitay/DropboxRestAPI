@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>DropboxRestAPI</id>
+    <version>1.0.0</version>
+    <title>DropboxRestAPI</title>
+    <description>DropboxRestAPI is a C# client for Dropbox service through its RESTful API.</description>
+    <authors>saguiitay</authors>
+    <language>en-US</language>
+    <projectUrl>https://github.com/saguiitay/DropboxRestAPI</projectUrl>
+    <licenseUrl>https://raw.githubusercontent.com/saguiitay/DropboxRestAPI/master/LICENSE</licenseUrl>
+    <tags>Dropbox HttpClient REST</tags>
+    <dependencies>
+        <group targetFramework="net45">
+          <dependency id="Microsoft.Net.Http" version="[2.2.22,)" />
+          <dependency id="Newtonsoft.Json" version="[6.0.0,)" />
+        </group>
+    </dependencies>
+  </metadata>
+</package>

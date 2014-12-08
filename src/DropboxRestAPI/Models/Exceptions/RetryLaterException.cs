@@ -24,7 +24,6 @@
 
 
 using System;
-using System.Runtime.Serialization;
 
 namespace DropboxRestAPI.Models.Exceptions
 {
@@ -41,11 +40,6 @@ namespace DropboxRestAPI.Models.Exceptions
 
         public RetryLaterException(string message, Exception innerException)
             : base(message, innerException)
-        {
-        }
-
-        protected RetryLaterException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
         {
         }
 

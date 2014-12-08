@@ -24,7 +24,6 @@
 
 
 using System;
-using System.Runtime.Serialization;
 
 namespace DropboxRestAPI.Models.Exceptions
 {
@@ -41,11 +40,6 @@ namespace DropboxRestAPI.Models.Exceptions
 
         public NotEnoughQuotaException(string message, Exception innerException)
             : base(message, innerException)
-        {
-        }
-
-        protected NotEnoughQuotaException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
         {
         }
     }

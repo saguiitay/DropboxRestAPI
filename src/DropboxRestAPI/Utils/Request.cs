@@ -25,7 +25,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Net.Http;
 
 namespace DropboxRestAPI.Utils
@@ -41,7 +40,7 @@ namespace DropboxRestAPI.Utils
 
     public class Request : IRequest
     {
-        private readonly NameValueCollection _query = new NameValueCollection();
+        private readonly HttpValueCollection _query = new HttpValueCollection();
 
         public string BaseAddress { get; set; }
         public string Resource { get; set; }
