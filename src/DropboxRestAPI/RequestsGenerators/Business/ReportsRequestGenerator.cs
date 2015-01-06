@@ -25,6 +25,7 @@
 
 using System;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using DropboxRestAPI.Utils;
 using Newtonsoft.Json.Linq;
 
@@ -44,9 +45,9 @@ namespace DropboxRestAPI.RequestsGenerators.Business
             var content = new JObject();
 
             if (start_date != null)
-                content["start_date"] = start_date.Value.ToUniversalTime().ToString("YYYY-MM-DD");
+                content["start_date"] = start_date.Value.ToUniversalTime().ToString("yyyy-MM-dd");
             if (end_date != null)
-                content["end_date"] = end_date.Value.ToUniversalTime().ToString("YYYY-MM-DD");
+                content["end_date"] = end_date.Value.ToUniversalTime().ToString("yyyy-MM-dd");
             request.Content = new JsonContent(content);
 
             return request;
@@ -64,9 +65,9 @@ namespace DropboxRestAPI.RequestsGenerators.Business
             var content = new JObject();
 
             if (start_date != null)
-                content["start_date"] = start_date.Value.ToUniversalTime().ToString("YYYY-MM-DD");
+                content["start_date"] = start_date.Value.ToUniversalTime().ToString("yyyy-MM-dd");
             if (end_date != null)
-                content["end_date"] = end_date.Value.ToUniversalTime().ToString("YYYY-MM-DD");
+                content["end_date"] = end_date.Value.ToUniversalTime().ToString("yyyy-MM-dd");
             request.Content = new JsonContent(content);
 
             return request;
@@ -84,9 +85,9 @@ namespace DropboxRestAPI.RequestsGenerators.Business
             var content = new JObject();
 
             if (start_date != null)
-                content["start_date"] = start_date.Value.ToUniversalTime().ToString("YYYY-MM-DD");
+                content["start_date"] = start_date.Value.ToUniversalTime().ToString("yyyy-MM-dd");
             if (end_date != null)
-                content["end_date"] = end_date.Value.ToUniversalTime().ToString("YYYY-MM-DD");
+                content["end_date"] = end_date.Value.ToUniversalTime().ToString("yyyy-MM-dd");
             request.Content = new JsonContent(content);
 
             return request;
@@ -104,9 +105,9 @@ namespace DropboxRestAPI.RequestsGenerators.Business
             var content = new JObject();
 
             if (start_date != null)
-                content["start_date"] = start_date.Value.ToUniversalTime().ToString("YYYY-MM-DD");
+                content["start_date"] = start_date.Value.ToUniversalTime().ToString("yyyy-MM-dd");
             if (end_date != null)
-                content["end_date"] = end_date.Value.ToUniversalTime().ToString("YYYY-MM-DD");
+                content["end_date"] = end_date.Value.ToUniversalTime().ToString("yyyy-MM-dd");
             request.Content = new JsonContent(content);
 
             return request;
