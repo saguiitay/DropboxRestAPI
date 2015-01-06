@@ -40,13 +40,13 @@ namespace DropboxRestAPI.Utils
 
     public class Request : IRequest
     {
-        private readonly HttpValueCollection _query = new HttpValueCollection();
 
         public string BaseAddress { get; set; }
         public string Resource { get; set; }
         public HttpMethod Method { get; set; }
 
         public HttpContent Content { get; set; }
+        public HttpValueCollection Query { get; private set; }
         public Dictionary<string, string> Headers { get; private set; }
 
         public Uri BuildUri()
@@ -61,7 +61,8 @@ namespace DropboxRestAPI.Utils
                 else
                     uriBuilder.Path += Resource;
             }
-            uriBuilder.Query = _query.ToQueryString(false);
+            if (Query != null)
+                uriBuilder.Query = Query.ToQueryString(false);
 
             return uriBuilder.Uri;
         }
@@ -71,8 +72,10 @@ namespace DropboxRestAPI.Utils
         {
             if (value == null)
                 return;
+            if (Query == null)
+                Query = new HttpValueCollection();
 
-            _query[key] = value;
+            Query.Add(key, value);
         }
 
         public void AddHeader(string name, string value)
