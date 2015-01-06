@@ -102,7 +102,6 @@
     <Compile Include="Models\Business\ActivityInfo.cs" />
     <Compile Include="Models\Business\DevicesInfo.cs" />
     <Compile Include="Models\Business\MembershipInfo.cs" />
-    <Compile Include="Models\Business\MemberStorage.cs" />
     <Compile Include="Models\Business\StorageInfo.cs" />
     <Compile Include="Models\Core\AccountInfo.cs" />
     <Compile Include="Http\AccessTokenAuthenticator.cs" />
