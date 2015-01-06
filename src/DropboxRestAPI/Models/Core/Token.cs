@@ -30,6 +30,6 @@ namespace DropboxRestAPI.Models.Core
         public string access_token { get; set; }
         public string token_type { get; set; }
         public string uid { get; set; }
-        
+        public string team_id { get; set; }
     }
 }
