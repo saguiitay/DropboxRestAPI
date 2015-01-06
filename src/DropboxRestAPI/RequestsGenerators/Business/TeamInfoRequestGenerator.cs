@@ -25,6 +25,7 @@
 
 using System;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using DropboxRestAPI.Utils;
 using Newtonsoft.Json.Linq;
 
@@ -40,6 +41,8 @@ namespace DropboxRestAPI.RequestsGenerators.Business
                     BaseAddress = Consts.ApiBaseUrl,
                     Resource = Consts.Version + "/team/get_info"
                 };
+            request.Content = new JsonContent(new {});
+            request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
             return request;
         }
@@ -61,6 +64,8 @@ namespace DropboxRestAPI.RequestsGenerators.Business
                 content["cursor"] = cursor;
 
             request.Content = new JsonContent(content);
+            request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
 
             return request;
         }
@@ -88,6 +93,7 @@ namespace DropboxRestAPI.RequestsGenerators.Business
             else if (external_id != null)
                 request.Content = new JsonContent(new {external_id});
 
+            request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
             return request;
         }
@@ -114,6 +120,8 @@ namespace DropboxRestAPI.RequestsGenerators.Business
                 request.Content = new JsonContent(new {emails});
             else if (external_ids != null)
                 request.Content = new JsonContent(new {external_ids});
+
+            request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
             return request;
         }

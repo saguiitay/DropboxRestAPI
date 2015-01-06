@@ -25,6 +25,7 @@
 
 using System;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using DropboxRestAPI.Utils;
 using Newtonsoft.Json.Linq;
 
@@ -71,6 +72,7 @@ namespace DropboxRestAPI.RequestsGenerators.Business
                 content["user"]["email"] = user_email;
 
             request.Content = new JsonContent(content);
+            request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
             return request;
         }

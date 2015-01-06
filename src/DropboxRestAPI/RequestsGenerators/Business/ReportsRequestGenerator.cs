@@ -49,6 +49,7 @@ namespace DropboxRestAPI.RequestsGenerators.Business
             if (end_date != null)
                 content["end_date"] = end_date.Value.ToUniversalTime().ToString("yyyy-MM-dd");
             request.Content = new JsonContent(content);
+            request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
             return request;
         }
@@ -69,6 +70,7 @@ namespace DropboxRestAPI.RequestsGenerators.Business
             if (end_date != null)
                 content["end_date"] = end_date.Value.ToUniversalTime().ToString("yyyy-MM-dd");
             request.Content = new JsonContent(content);
+            request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
             return request;
         }
@@ -89,6 +91,7 @@ namespace DropboxRestAPI.RequestsGenerators.Business
             if (end_date != null)
                 content["end_date"] = end_date.Value.ToUniversalTime().ToString("yyyy-MM-dd");
             request.Content = new JsonContent(content);
+            request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
             return request;
         }
@@ -109,6 +112,7 @@ namespace DropboxRestAPI.RequestsGenerators.Business
             if (end_date != null)
                 content["end_date"] = end_date.Value.ToUniversalTime().ToString("yyyy-MM-dd");
             request.Content = new JsonContent(content);
+            request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
             return request;
         }
