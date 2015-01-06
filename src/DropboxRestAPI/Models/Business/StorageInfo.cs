@@ -23,6 +23,8 @@
  */
 
 
+using System.Collections.Generic;
+
 namespace DropboxRestAPI.Models.Business
 {
     public class StorageInfo
@@ -32,6 +34,6 @@ namespace DropboxRestAPI.Models.Business
         public long?[] shared_usage { get; set; }
         public long?[] unshared_usage { get; set; }
         public long?[] shared_folders { get; set; }
-        public MemberStorage[] member_storage_map { get; set; }
+        public Dictionary<string, long?>[] member_storage_map { get; set; }
     }
 }
