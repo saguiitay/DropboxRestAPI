@@ -30,7 +30,7 @@ namespace DropboxRestAPI.RequestsGenerators.Core
 {
     public class AccountsRequestGenerator : IAccountsRequestGenerator
     {
-        public IRequest AccountInfo(string locale = null)
+        public IRequest AccountInfo(string locale = null, string asTeamMember = null)
         {
             var request = new Request
                 {
@@ -38,6 +38,7 @@ namespace DropboxRestAPI.RequestsGenerators.Core
                     BaseAddress = Consts.ApiBaseUrl,
                     Resource = Consts.Version + "/account/info"
                 };
+            request.AddHeader(Consts.AsTeamMemberHeader, asTeamMember);
             request.AddParameter("locale", locale);
 
             return request;

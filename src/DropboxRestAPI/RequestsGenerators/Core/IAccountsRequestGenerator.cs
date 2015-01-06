@@ -29,6 +29,6 @@ namespace DropboxRestAPI.RequestsGenerators.Core
 {
     public interface IAccountsRequestGenerator
     {
-        IRequest AccountInfo(string locale = null);
+        IRequest AccountInfo(string locale = null, string asTeamMember = null);
     }
 }

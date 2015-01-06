@@ -40,9 +40,9 @@ namespace DropboxRestAPI.Services.Core
             _requestGenerator = requestGenerator;
         }
 
-        public async Task<AccountInfo> AccountInfoAsync(string locale = null)
+        public async Task<AccountInfo> AccountInfoAsync(string locale = null, string asTeamMember = null)
         {
-            return await _requestExecuter.Execute<AccountInfo>(() => _requestGenerator.AccountInfo(locale));
+            return await _requestExecuter.Execute<AccountInfo>(() => _requestGenerator.AccountInfo(locale, asTeamMember));
         }
     }
 }

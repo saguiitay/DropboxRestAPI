@@ -35,9 +35,10 @@ namespace DropboxRestAPI.Services.Core
         /// <remarks>https://www.dropbox.com/developers/core/docs#account-info</remarks>
         /// </summary>
         /// <param name="locale">Use to specify language settings for user error messages and other language specific text.</param>
+        /// <param name="asTeamMember">Specify the member_id of the user that the app wants to act on.</param>
         /// <returns>
         /// User account information.
         /// </returns>
-        Task<AccountInfo> AccountInfoAsync(string locale = null);
+        Task<AccountInfo> AccountInfoAsync(string locale = null, string asTeamMember = null);
     }
 }
