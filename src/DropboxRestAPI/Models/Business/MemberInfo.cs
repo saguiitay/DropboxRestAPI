@@ -27,6 +27,7 @@ namespace DropboxRestAPI.Models.Business
 {
     public class MemberInfo
     {
+        public MemberProfile profile { get; set; } 
         public MemberPermissions permissions { get; set; }
     }
 }
