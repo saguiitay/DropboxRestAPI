@@ -45,22 +45,22 @@ namespace DropboxRestAPI.Services.Business
 
         public async Task<StorageInfo> GetStorageAsync(DateTime? start_date, DateTime? end_date)
         {
-            return await _requestExecuter.Execute<StorageInfo>(() => _requestGenerator.GetStorage(start_date, end_date));
+            return await _requestExecuter.Execute<StorageInfo>(() => _requestGenerator.GetStorage(start_date, end_date)).ConfigureAwait(false);
         }
 
         public async Task<ActivityInfo> GetActivityAsync(DateTime? start_date, DateTime? end_date)
         {
-            return await _requestExecuter.Execute<ActivityInfo>(() => _requestGenerator.GetActivity(start_date, end_date));
+            return await _requestExecuter.Execute<ActivityInfo>(() => _requestGenerator.GetActivity(start_date, end_date)).ConfigureAwait(false);
         }
 
         public async Task<MembershipInfo> GetMembershipAsync(DateTime? start_date, DateTime? end_date)
         {
-            return await _requestExecuter.Execute<MembershipInfo>(() => _requestGenerator.GetMembership(start_date, end_date));
+            return await _requestExecuter.Execute<MembershipInfo>(() => _requestGenerator.GetMembership(start_date, end_date)).ConfigureAwait(false);
         }
 
         public async Task<DevicesInfo> GetDevicesAsync(DateTime? start_date, DateTime? end_date)
         {
-            return await _requestExecuter.Execute<DevicesInfo>(() => _requestGenerator.GetDevices(start_date, end_date));
+            return await _requestExecuter.Execute<DevicesInfo>(() => _requestGenerator.GetDevices(start_date, end_date)).ConfigureAwait(false);
         }
     }
 }

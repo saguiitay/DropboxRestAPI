@@ -46,7 +46,7 @@ namespace DropboxRestAPI.Services.Business
         public async Task<Events> GetEventsAsync(int limit = 1000, string cursor = null, string member_id = null, string user_id = null, string user_email = null, string category = null,
             DateTime? start_ts = null, DateTime? end_ts = null)
         {
-            return await _requestExecuter.Execute<Events>(() => _requestGenerator.GetEvents(limit, cursor, member_id, user_id, user_email, category, start_ts, end_ts));
+            return await _requestExecuter.Execute<Events>(() => _requestGenerator.GetEvents(limit, cursor, member_id, user_id, user_email, category, start_ts, end_ts)).ConfigureAwait(false);
         }
     }
 }

@@ -47,22 +47,22 @@ namespace DropboxRestAPI.Services.Core
 
         public async Task<MetaData> CopyAsync(string from_path, string to_path, string from_copy_ref = null, string locale = null, string asTeamMember = null)
         {
-            return await _requestExecuter.Execute<MetaData>(() => _requestGenerator.Copy(_options.Root, from_path, to_path, from_copy_ref, locale, asTeamMember));
+            return await _requestExecuter.Execute<MetaData>(() => _requestGenerator.Copy(_options.Root, from_path, to_path, from_copy_ref, locale, asTeamMember)).ConfigureAwait(false);
         }
 
         public async Task<MetaData> CreateFolderAsync(string path, string locale = null, string asTeamMember = null)
         {
-            return await _requestExecuter.Execute<MetaData>(() => _requestGenerator.CreateFolder(_options.Root, path, locale, asTeamMember));
+            return await _requestExecuter.Execute<MetaData>(() => _requestGenerator.CreateFolder(_options.Root, path, locale, asTeamMember)).ConfigureAwait(false);
         }
 
         public async Task<MetaData> DeleteAsync(string path, string locale = null, string asTeamMember = null)
         {
-            return await _requestExecuter.Execute<MetaData>(() => _requestGenerator.Delete(_options.Root, path, locale, asTeamMember));
+            return await _requestExecuter.Execute<MetaData>(() => _requestGenerator.Delete(_options.Root, path, locale, asTeamMember)).ConfigureAwait(false);
         }
 
         public async Task<MetaData> MoveAsync(string from_path, string to_path, string locale = null, string asTeamMember = null)
         {
-            return await _requestExecuter.Execute<MetaData>(() => _requestGenerator.Move(_options.Root, from_path, to_path, locale, asTeamMember));
+            return await _requestExecuter.Execute<MetaData>(() => _requestGenerator.Move(_options.Root, from_path, to_path, locale, asTeamMember)).ConfigureAwait(false);
         }
 
         #endregion

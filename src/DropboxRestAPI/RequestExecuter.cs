@@ -51,7 +51,7 @@ namespace DropboxRestAPI
 
         public async Task<T> ExecuteAuthorization<T>(IRequest restRequest) where T : new()
         {
-            return await Execute<T>(() => restRequest, _clientOAuth);
+            return await Execute<T>(() => restRequest, _clientOAuth).ConfigureAwait(false);
         }
 
         public async Task<HttpResponseMessage> Execute(Func<IRequest> restRequest, HttpClient restClient = null)
@@ -61,8 +61,8 @@ namespace DropboxRestAPI
 
             IRequest request = restRequest();
 
-            HttpResponseMessage restResponse = await restClient.Execute(request);
-            await CheckForError(restResponse, false);
+            HttpResponseMessage restResponse = await restClient.Execute(request).ConfigureAwait(false);
+            await CheckForError(restResponse, false).ConfigureAwait(false);
 
             return restResponse;
         }
@@ -74,8 +74,8 @@ namespace DropboxRestAPI
 
             IRequest request = restRequest();
 
-            HttpResponseMessage restResponse = await restClient.Execute(request);
-            string content = await CheckForError(restResponse);
+            HttpResponseMessage restResponse = await restClient.Execute(request).ConfigureAwait(false);
+            string content = await CheckForError(restResponse).ConfigureAwait(false);
 
             var data = JsonConvert.DeserializeObject<T>(content);
 
@@ -88,7 +88,7 @@ namespace DropboxRestAPI
             string content = null;
 
             if (readResponse)
-                content = await httpResponse.Content.ReadAsStringAsync();
+                content = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
 
             if (statusCode == 0)
                 throw new HttpException((int) statusCode, content) {Attempts = 1};

@@ -53,7 +53,7 @@ namespace DropboxRestAPI.Services.Core
 
         public async Task<Token> TokenAsync(string code)
         {
-            var token = await _requestExecuter.Execute<Token>(() => _requestGenerator.AccessToken(_options.ClientId, _options.ClientSecret, _options.RedirectUri, code));
+            var token = await _requestExecuter.Execute<Token>(() => _requestGenerator.AccessToken(_options.ClientId, _options.ClientSecret, _options.RedirectUri, code)).ConfigureAwait(false);
 
             _options.AccessToken = token.access_token;
             return token;

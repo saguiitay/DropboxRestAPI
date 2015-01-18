@@ -45,22 +45,22 @@ namespace DropboxRestAPI.Services.Business
 
         public async Task<TeamInfo> GetInfoAsync()
         {
-            return await _requestExecuter.Execute<TeamInfo>(() => _requestGenerator.GetInfo());
+            return await _requestExecuter.Execute<TeamInfo>(() => _requestGenerator.GetInfo()).ConfigureAwait(false);
         }
 
         public async Task<Models.Business.Members> GetMembersAsync(int limit = 1000, string cursor = null)
         {
-            return await _requestExecuter.Execute<Models.Business.Members>(() => _requestGenerator.GetMembers(limit, cursor));
+            return await _requestExecuter.Execute<Models.Business.Members>(() => _requestGenerator.GetMembers(limit, cursor)).ConfigureAwait(false);
         }
 
         public async Task<MemberInfo> GetMemberInfoAsync(string member_id = null, string email = null, string external_id = null)
         {
-            return await _requestExecuter.Execute<MemberInfo>(() => _requestGenerator.GetMemberInfo(member_id, email, external_id));
+            return await _requestExecuter.Execute<MemberInfo>(() => _requestGenerator.GetMemberInfo(member_id, email, external_id)).ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<MemberInfo>> GetMembersInfoBatchAsync(string[] member_ids = null, string[] emails = null, string[] external_ids = null)
         {
-            return await _requestExecuter.Execute<IEnumerable<MemberInfo>>(() => _requestGenerator.GetMembersInfoBatch(member_ids, emails, external_ids));
+            return await _requestExecuter.Execute<IEnumerable<MemberInfo>>(() => _requestGenerator.GetMembersInfoBatch(member_ids, emails, external_ids)).ConfigureAwait(false);
         }
     }
 }

@@ -45,24 +45,24 @@ namespace DropboxRestAPI.Services.Business
         public async Task<MemberInfo> AddAsync(string member_email, string member_given_name, string member_surname, string member_external_id = null,
             bool? send_welcome_email = null)
         {
-            return await _requestExecuter.Execute<MemberInfo>(() => _requestGenerator.Add(member_email, member_given_name, member_surname, member_external_id, send_welcome_email));
+            return await _requestExecuter.Execute<MemberInfo>(() => _requestGenerator.Add(member_email, member_given_name, member_surname, member_external_id, send_welcome_email)).ConfigureAwait(false);
         }
 
         public async Task<MemberInfo> SetProfileAsync(string member_id = null, string external_id = null, string new_email = null,
             string new_external_id = null)
         {
-            return await _requestExecuter.Execute<MemberInfo>(() => _requestGenerator.SetProfile(member_id, external_id, new_email, new_external_id));
+            return await _requestExecuter.Execute<MemberInfo>(() => _requestGenerator.SetProfile(member_id, external_id, new_email, new_external_id)).ConfigureAwait(false);
         }
 
         public async Task<PermissionInfo> SetPermissionsAsync(string member_id = null, string external_id = null, bool? new_is_admin = null)
         {
-            return await _requestExecuter.Execute<PermissionInfo>(() => _requestGenerator.SetPermissions(member_id, external_id, new_is_admin));
+            return await _requestExecuter.Execute<PermissionInfo>(() => _requestGenerator.SetPermissions(member_id, external_id, new_is_admin)).ConfigureAwait(false);
         }
 
         public async Task RemoveAsync(string member_id = null, string external_id = null, string transfer_dest_member_id = null,
             string transfer_admin_member_id = null, bool delete_data = true)
         {
-            await _requestExecuter.Execute(() => _requestGenerator.Remove(member_id, external_id, transfer_dest_member_id, transfer_admin_member_id, delete_data));
+            await _requestExecuter.Execute(() => _requestGenerator.Remove(member_id, external_id, transfer_dest_member_id, transfer_admin_member_id, delete_data)).ConfigureAwait(false);
         }
     }
 }

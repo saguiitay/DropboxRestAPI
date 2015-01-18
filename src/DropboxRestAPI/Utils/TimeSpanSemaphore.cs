@@ -138,7 +138,7 @@ namespace DropboxRestAPI.Utils
 
             try
             {
-                await action();
+                await action().ConfigureAwait(false);
             }
             finally
             {
@@ -156,7 +156,7 @@ namespace DropboxRestAPI.Utils
 
             try
             {
-                await action(arg);
+                await action(arg).ConfigureAwait(false);
             }
             finally
             {
@@ -174,7 +174,7 @@ namespace DropboxRestAPI.Utils
 
             try
             {
-                return await action(arg, cancelToken);
+                return await action(arg, cancelToken).ConfigureAwait(false);
             }
             finally
             {
