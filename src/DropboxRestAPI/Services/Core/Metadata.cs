@@ -114,9 +114,9 @@ namespace DropboxRestAPI.Services.Core
             return await _requestExecuter.Execute<Entries>(() => _requestGenerator.Delta(cursor, locale, path_prefix, include_media_info, asTeamMember)).ConfigureAwait(false);
         }
 
-        public async Task<Entries> DeltaLatestCursorAsync(string path_prefix = null, bool include_media_info = false, string asTeamMember = null)
+        public async Task<DeltaCursor> DeltaLatestCursorAsync(string path_prefix = null, bool include_media_info = false, string asTeamMember = null)
         {
-            return await _requestExecuter.Execute<Entries>(() => _requestGenerator.DeltaLatestCursor(path_prefix, include_media_info, asTeamMember)).ConfigureAwait(false);
+            return await _requestExecuter.Execute<DeltaCursor>(() => _requestGenerator.DeltaLatestCursor(path_prefix, include_media_info, asTeamMember)).ConfigureAwait(false);
         }
 
         public async Task<LongPollDelta> LongPollDeltaAsync(string cursor = null, int timeout = 30, string asTeamMember = null)

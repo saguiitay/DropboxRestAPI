@@ -147,7 +147,7 @@ namespace DropboxRestAPI.Services.Core
         /// <param name="include_media_info">If true, the returned cursor will be encoded with include_media_info set to true for use with /delta.</param>
         /// <param name="asTeamMember">Specify the member_id of the user that the app wants to act on.</param>
         /// <returns>The latest server state, as would be returned by /delta when has_more is false.</returns>
-        Task<Entries> DeltaLatestCursorAsync(string path_prefix = null, bool include_media_info = false, string asTeamMember = null);
+        Task<DeltaCursor> DeltaLatestCursorAsync(string path_prefix = null, bool include_media_info = false, string asTeamMember = null);
         
         /// <summary>
         /// A long-poll endpoint to wait for changes on an account. In conjunction with /delta, this call gives you a low-latency way

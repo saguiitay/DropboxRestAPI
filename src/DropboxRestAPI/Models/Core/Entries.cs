@@ -22,7 +22,10 @@
  * SOFTWARE.
  */
 
+using System;
 using System.Collections.Generic;
+using DropboxRestAPI.Utils;
+using Newtonsoft.Json;
 
 namespace DropboxRestAPI.Models.Core
 {
@@ -48,7 +51,8 @@ namespace DropboxRestAPI.Models.Core
         /// Note: Dropbox treats file names in a case-insensitive but case-preserving way. To facilitate this, the &gt;path&lt; values
         /// above are lower-cased versions of the actual path. The last path component of the &gt;metadata&lt; value will be case-preserved.
         /// </summary>
-        public IEnumerable<string[]> entries { get; set; }
+        [JsonConverter(typeof(TupleStringMetadataConverter))]
+        public IEnumerable<Tuple<string, MetaData>> entries { get; set; }
         /// <summary>
         /// If true, clear your local state before processing the delta entries. reset is always true on the initial call to /delta
         /// (i.e. when no cursor is passed in). Otherwise, it is true in rare situations, such as after server or account maintenance,
