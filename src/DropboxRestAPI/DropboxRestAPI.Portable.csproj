@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Models\Business\Event.cs" />
     <Compile Include="Models\Business\EventInfo.cs" />
+    <Compile Include="Models\Core\DeltaCursor.cs" />
     <Compile Include="Models\Core\PhotoInfo.cs" />
     <Compile Include="Models\Core\VideoInfo.cs" />
     <Compile Include="Models\Core\Token.cs" />
@@ -143,6 +144,7 @@
     <Compile Include="Options.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestsGenerators\RequestGenerator.cs" />
+    <Compile Include="Utils\TupleStringMetadataConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

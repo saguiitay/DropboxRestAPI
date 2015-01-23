@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using DropboxRestAPI.Models.Core;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -35,7 +36,7 @@ namespace DropboxRestAPI.Utils
 
         public override bool CanConvert(Type objectType)
         {
-            return typeof(IEnumerable<Tuple<string, MetaData>>).IsAssignableFrom(objectType);
+            return typeof(IEnumerable<Tuple<string, MetaData>>).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo());
         }
 
         #endregion
