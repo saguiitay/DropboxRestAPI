@@ -23,7 +23,7 @@ namespace DropboxRestAPI.Utils
         public static string ToQueryString(this HttpValueCollection nvc, bool includePrefix = true)
         {
             string[] array = (from kvp in nvc
-                              select string.Format("{0}={1}", Uri.EscapeUriString(kvp.Key), Uri.EscapeUriString(kvp.Value)))
+                              select string.Format("{0}={1}", Uri.EscapeUriString(kvp.Key), Uri.EscapeDataString(kvp.Value)))
                 .ToArray();
             return (includePrefix ? "?" : "") + string.Join("&", array);
         }
