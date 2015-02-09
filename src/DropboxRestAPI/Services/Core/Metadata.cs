@@ -54,48 +54,50 @@ namespace DropboxRestAPI.Services.Core
         public async Task<MetaData> FilesAsync(string path, Stream targetStream, string rev = null, string asTeamMember = null)
         {
             MetaData fileMetadata = null;
-            HttpResponseMessage restResponse = await _requestExecuter.Execute(() => _requestGenerator.Files(_options.Root, path, rev, asTeamMember)).ConfigureAwait(false);
-            await _requestExecuter.CheckForError(restResponse, false).ConfigureAwait(false);
-
-            long? length = restResponse.Content.Headers.ContentLength;
-            if (length == null)
+            using (var restResponse = await _requestExecuter.Execute(() => _requestGenerator.Files(_options.Root, path, rev, asTeamMember)).ConfigureAwait(false))
             {
-                IEnumerable<string> metadatas;
-                if (restResponse.Headers.TryGetValues("x-dropbox-metadata", out metadatas))
+                await _requestExecuter.CheckForError(restResponse, false).ConfigureAwait(false);
+
+                long? length = restResponse.Content.Headers.ContentLength;
+                if (length == null)
                 {
-                    string metadata = metadatas.FirstOrDefault();
-                    if (metadata != null)
+                    IEnumerable<string> metadatas;
+                    if (restResponse.Headers.TryGetValues("x-dropbox-metadata", out metadatas))
                     {
-                        fileMetadata = JsonConvert.DeserializeObject<MetaData>(metadata);
-                        length = fileMetadata.bytes;
+                        string metadata = metadatas.FirstOrDefault();
+                        if (metadata != null)
+                        {
+                            fileMetadata = JsonConvert.DeserializeObject<MetaData>(metadata);
+                            length = fileMetadata.bytes;
+                        }
                     }
                 }
+                string etag = "";
+                IEnumerable<string> etags;
+                if (restResponse.Headers.TryGetValues("etag", out etags))
+                    etag = etags.FirstOrDefault();
+
+
+                long? read = 0;
+                do
+                {
+                    long? from = read;
+                    long? to = read + _options.ChunkSize;
+                    if (to > length)
+                        to = length;
+
+                    using (var restResponse2 = await  _requestExecuter.Execute(() => _requestGenerator.FilesRange(_options.Root, path, from.Value, to.Value - 1, etag, rev, asTeamMember)).ConfigureAwait(false))
+                    {
+                        await restResponse2.Content.CopyToAsync(targetStream).ConfigureAwait(false);
+
+                        read += restResponse2.Content.Headers.ContentLength;
+                    }
+
+                    if (read >= length)
+                        break;
+                } while (restResponse.StatusCode == HttpStatusCode.PartialContent);
+
             }
-            string etag = "";
-            IEnumerable<string> etags;
-            if (restResponse.Headers.TryGetValues("etag", out etags))
-                etag = etags.FirstOrDefault();
-
-
-            long? read = 0;
-            do
-            {
-                long? from = read;
-                long? to = read + _options.ChunkSize;
-                if (to > length)
-                    to = length;
-
-                restResponse =
-                    await
-                        _requestExecuter.Execute(() => _requestGenerator.FilesRange(_options.Root, path, from.Value, to.Value - 1, etag, rev, asTeamMember)).ConfigureAwait(false);
-                await restResponse.Content.CopyToAsync(targetStream).ConfigureAwait(false);
-
-                read += restResponse.Content.Headers.ContentLength;
-
-                if (read >= length)
-                    break;
-            } while (restResponse.StatusCode == HttpStatusCode.PartialContent);
-
             return fileMetadata;
         }
 
@@ -156,10 +158,12 @@ namespace DropboxRestAPI.Services.Core
 
         public async Task<Stream> ThumbnailsAsync(string path, string format = "jpeg", string size = "s", string asTeamMember = null)
         {
-            var restResponse = await _requestExecuter.Execute(() => _requestGenerator.Thumbnails(_options.Root, path, format, size, asTeamMember)).ConfigureAwait(false);
-            await _requestExecuter.CheckForError(restResponse, false).ConfigureAwait(false);
+            using (var restResponse = await _requestExecuter.Execute(() => _requestGenerator.Thumbnails(_options.Root, path, format, size, asTeamMember)).ConfigureAwait(false))
+            {
+                await _requestExecuter.CheckForError(restResponse, false).ConfigureAwait(false);
 
-            return await restResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
+                return await restResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            }
         }
 
         public async Task<Preview> PreviewsAsync(string path, string rev = null, string asTeamMember = null)

@@ -29,7 +29,7 @@ using System.Net.Http;
 
 namespace DropboxRestAPI.Utils
 {
-    public interface IRequest
+    public interface IRequest : IDisposable
     {
         HttpMethod Method { get; }
         HttpContent Content { get; set; }
@@ -40,7 +40,7 @@ namespace DropboxRestAPI.Utils
 
     public class Request : IRequest
     {
-
+        private bool _disposed;
         public string BaseAddress { get; set; }
         public string Resource { get; set; }
         public HttpMethod Method { get; set; }
@@ -86,6 +86,27 @@ namespace DropboxRestAPI.Utils
                 Headers = new Dictionary<string, string>();
 
             Headers.Add(name, value);
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(true);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (_disposed)
+                return;
+
+            _disposed = true;
+            if (disposing)
+            {
+                if (Content != null)
+                {
+                    Content.Dispose();
+                }
+            }
         }
     }
 }

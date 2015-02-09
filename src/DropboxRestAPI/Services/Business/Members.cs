@@ -62,7 +62,14 @@ namespace DropboxRestAPI.Services.Business
         public async Task RemoveAsync(string member_id = null, string external_id = null, string transfer_dest_member_id = null,
             string transfer_admin_member_id = null, bool delete_data = true)
         {
-            await _requestExecuter.Execute(() => _requestGenerator.Remove(member_id, external_id, transfer_dest_member_id, transfer_admin_member_id, delete_data)).ConfigureAwait(false);
+            using (
+                var response =
+                    await _requestExecuter.Execute(
+                            () =>
+                                _requestGenerator.Remove(member_id, external_id, transfer_dest_member_id,
+                                    transfer_admin_member_id, delete_data)).ConfigureAwait(false))
+            {
+            }
         }
     }
 }

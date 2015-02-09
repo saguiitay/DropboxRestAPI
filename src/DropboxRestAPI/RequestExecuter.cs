@@ -59,12 +59,14 @@ namespace DropboxRestAPI
             if (restClient == null)
                 restClient = _clientContent;
 
-            IRequest request = restRequest();
+            using (IRequest request = restRequest())
+            {
 
-            HttpResponseMessage restResponse = await restClient.Execute(request).ConfigureAwait(false);
-            await CheckForError(restResponse, false).ConfigureAwait(false);
+                HttpResponseMessage restResponse = await restClient.Execute(request).ConfigureAwait(false);
+                await CheckForError(restResponse, false).ConfigureAwait(false);
 
-            return restResponse;
+                return restResponse;
+            }
         }
 
         public async Task<T> Execute<T>(Func<IRequest> restRequest, HttpClient restClient = null)
@@ -72,14 +74,15 @@ namespace DropboxRestAPI
             if (restClient == null)
                 restClient = _clientContent;
 
-            IRequest request = restRequest();
+            using (IRequest request = restRequest())
+            using (HttpResponseMessage restResponse = await restClient.Execute(request).ConfigureAwait(false))
+            {
+                string content = await CheckForError(restResponse).ConfigureAwait(false);
 
-            HttpResponseMessage restResponse = await restClient.Execute(request).ConfigureAwait(false);
-            string content = await CheckForError(restResponse).ConfigureAwait(false);
+                var data = JsonConvert.DeserializeObject<T>(content);
 
-            var data = JsonConvert.DeserializeObject<T>(content);
-
-            return data;
+                return data;
+            }
         }
 
         public async Task<string> CheckForError(HttpResponseMessage httpResponse, bool readResponse = true)
