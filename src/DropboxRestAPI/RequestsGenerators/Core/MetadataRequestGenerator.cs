@@ -58,6 +58,9 @@ namespace DropboxRestAPI.RequestsGenerators.Core
                 };
             request.AddHeader(Consts.AsTeamMemberHeader, asTeamMember);
 
+            if (to < 0)
+                to = 0;
+
             request.AddHeader("Range", string.Format("bytes={0}-{1}", from, to));
             request.AddHeader("ETag", etag);
 
