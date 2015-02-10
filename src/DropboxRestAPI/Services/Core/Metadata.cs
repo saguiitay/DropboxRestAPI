@@ -79,23 +79,28 @@ namespace DropboxRestAPI.Services.Core
 
 
                 long? read = 0;
+                bool hasMore = true;
                 do
                 {
                     long? from = read;
                     long? to = read + _options.ChunkSize;
                     if (to > length)
                         to = length;
+                    if (from >= length)
+                        break;
 
                     using (var restResponse2 = await  _requestExecuter.Execute(() => _requestGenerator.FilesRange(_options.Root, path, from.Value, to.Value - 1, etag, rev, asTeamMember)).ConfigureAwait(false))
                     {
                         await restResponse2.Content.CopyToAsync(targetStream).ConfigureAwait(false);
 
                         read += restResponse2.Content.Headers.ContentLength;
+                        
+                        if (read >= length)
+                            hasMore = false;
+                        else if (restResponse2.StatusCode == HttpStatusCode.OK)
+                            hasMore = false;
                     }
-
-                    if (read >= length)
-                        break;
-                } while (restResponse.StatusCode == HttpStatusCode.PartialContent);
+                } while (hasMore);
 
             }
             return fileMetadata;
