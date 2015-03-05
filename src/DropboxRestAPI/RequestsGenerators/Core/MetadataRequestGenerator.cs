@@ -135,7 +135,7 @@ namespace DropboxRestAPI.RequestsGenerators.Core
                 };
             request.AddHeader(Consts.AsTeamMemberHeader, asTeamMember);
 
-            request.AddHeader("cursor", cursor);
+            request.AddParameter("cursor", cursor);
             request.AddHeader("locale", locale);
             request.AddParameter("path_prefix", path_prefix);
             if (include_media_info)
