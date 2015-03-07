@@ -99,11 +99,34 @@ namespace DropboxRestAPI.Models.Core
         /// Only returned when the include_media_info parameter is true and the file is a video. 
         /// </summary>
         public VideoInfo video_info { get; set; }
-
         /// <summary>
         /// List of metadata entries for the contents of the folder. 
         /// </summary>
         public List<MetaData> contents { get; set; }
+        /// <summary>
+        /// This field will be included for shared folders. If the include_membership parameter is passed, there will
+        /// additionally be a membership field and a groups field.
+        /// </summary>
+        public SharedFolder shared_folder { get; set; }
+        /// <summary>
+        /// For shared folders, this field specifies whether the user has read-only access to the folder. For files within
+        /// a shared folder, this specifies the read-only status of the parent shared folder.
+        /// </summary>
+        public bool read_only { get; set; }
+        /// <summary>
+        /// For files within a shared folder, this field specifies the ID of the containing shared folder.
+        /// </summary>
+        public string parent_shared_folder_id { get; set; }
+        /// <summary>
+        /// For files within a shared folder, this field specifies which user last modified this file. The value is a user
+        /// dictionary with the fields uid (user ID), display_name, and, if the linked account is a member of a Dropbox for
+        /// Business team, same_team (whether the user is on the same team as the linked account). If this endpoint is called
+        /// by a Dropbox for Business app and the user is on that team, a member_id field will also be present in the user
+        /// dictionary. If the modifying user no longer exists, the value will be null.
+        /// </summary>
+        public User modifier { get; set; }
+
+        
 
         public string Name
         {
