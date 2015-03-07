@@ -24,6 +24,9 @@ DropboxRestAPI is available as a [NuGet package](https://www.nuget.org/packages/
 
 ## Release Notes
 
++ **1.0.5**   Fixed usage of 'cursor' parameter. Added support for SharedFolder information.
++ **1.0.4**   Fixed issues with downloading of large files.
++ **1.0.3**   Fixed issues with downloading of zero-bytes files.
 + **1.0.0**   Initial release.
 
 ## Usage
