@@ -53,7 +53,11 @@
     <Compile Include="Models\Business\Event.cs" />
     <Compile Include="Models\Business\EventInfo.cs" />
     <Compile Include="Models\Core\DeltaCursor.cs" />
+    <Compile Include="Models\Core\Membership.cs" />
+    <Compile Include="Models\Core\Owner.cs" />
     <Compile Include="Models\Core\PhotoInfo.cs" />
+    <Compile Include="Models\Core\SharedFolder.cs" />
+    <Compile Include="Models\Core\User.cs" />
     <Compile Include="Models\Core\VideoInfo.cs" />
     <Compile Include="Models\Core\Token.cs" />
     <Compile Include="RequestsGenerators\Business\BusinessRequestGenerator.cs" />
