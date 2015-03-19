@@ -47,7 +47,7 @@ namespace DropboxRestAPI.RequestsGenerators.Core
         IRequest Thumbnails(string root, string path, string format = "jpeg", string size = "s", string asTeamMember = null);
         IRequest Previews(string root, string path, string rev = null, string asTeamMember = null);
 
-        IRequest ChunkedUpload(byte[] content, string uploadId = null, long? offset = null, string asTeamMember = null);
+        IRequest ChunkedUpload(byte[] content, int count, string uploadId = null, long? offset = null, string asTeamMember = null);
         IRequest CommitChunkedUpload(string root, string path, string uploadId, string locale = null, bool overwrite = true, string parent_rev = null, bool autorename = true, string asTeamMember = null);
 
         IRequest SharedFolders(string id = null, string asTeamMember = null);

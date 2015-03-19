@@ -299,20 +299,21 @@ namespace DropboxRestAPI.Services.Core
         /// A chunked upload can take a maximum of 24 hours before expiring.
         /// </summary>
         /// <param name="content">
-        /// A chunk of data from the file being uploaded. If resuming, the chunk should begin at the number of bytes into the file
-        /// that equals the offset.
+        ///     A chunk of data from the file being uploaded. If resuming, the chunk should begin at the number of bytes into the file
+        ///     that equals the offset.
         /// </param>
+        /// <param name="count">Number of bytes in the content buffer to send as the chunk</param>
         /// <param name="uploadId">
-        /// The unique ID of the in-progress upload on the server. If left blank, the server will create a
-        /// new upload session.
+        ///     The unique ID of the in-progress upload on the server. If left blank, the server will create a
+        ///     new upload session.
         /// </param>
         /// <param name="offset">
-        /// The byte offset of this chunk, relative to the beginning of the full file. The server will verify that this matches the
-        /// offset it expects. If it does not, the server will return an error with the expected offset.
+        ///     The byte offset of this chunk, relative to the beginning of the full file. The server will verify that this matches the
+        ///     offset it expects. If it does not, the server will return an error with the expected offset.
         /// </param>
         /// <param name="asTeamMember">Specify the member_id of the user that the app wants to act on.</param>
         /// <returns>Details of the upload chunk</returns>
-        Task<ChunkedUpload> ChunkedUploadAsync(byte[] content, string uploadId = null, long? offset = null, string asTeamMember = null);
+        Task<ChunkedUpload> ChunkedUploadAsync(byte[] content, int count, string uploadId = null, long? offset = null, string asTeamMember = null);
 
         /// <summary>
         /// Completes an upload initiated by the /chunked_upload method. Saves a file uploaded via /chunked_upload to a user's Dropbox.

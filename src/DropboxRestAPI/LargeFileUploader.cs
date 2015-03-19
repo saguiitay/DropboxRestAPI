@@ -32,9 +32,9 @@ namespace DropboxRestAPI
                 {
                     endPosition = _dataSource.Length;
                 }
-                await _dataSource.ReadAsync(fragmentBuffer, 0, (int)Math.Max(0, endPosition - currentPosition));
+                var count = await _dataSource.ReadAsync(fragmentBuffer, 0, (int)Math.Max(0, endPosition - currentPosition));
 
-                var response = await _client.Core.Metadata.ChunkedUploadAsync(fragmentBuffer, uploadId, currentPosition, asTeamMember);
+                var response = await _client.Core.Metadata.ChunkedUploadAsync(fragmentBuffer, count, uploadId, currentPosition, asTeamMember);
                 uploadId = response.upload_id;
 
                 currentPosition = endPosition;

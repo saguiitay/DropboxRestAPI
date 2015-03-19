@@ -176,9 +176,9 @@ namespace DropboxRestAPI.Services.Core
             return await _requestExecuter.Execute<Preview>(() => _requestGenerator.Previews(_options.Root, path, rev, asTeamMember)).ConfigureAwait(false);
         }
 
-        public async Task<ChunkedUpload> ChunkedUploadAsync(byte[] content, string uploadId = null, long? offset = null, string asTeamMember = null)
+        public async Task<ChunkedUpload> ChunkedUploadAsync(byte[] content, int count, string uploadId = null, long? offset = null, string asTeamMember = null)
         {
-            return await _requestExecuter.Execute<ChunkedUpload>(() => _requestGenerator.ChunkedUpload(content, uploadId, offset, asTeamMember)).ConfigureAwait(false);
+            return await _requestExecuter.Execute<ChunkedUpload>(() => _requestGenerator.ChunkedUpload(content, count, uploadId, offset, asTeamMember)).ConfigureAwait(false);
         }
 
         public async Task<MetaData> CommitChunkedUploadAsync(string path, string uploadId, string locale = null, bool overwrite = true, string parent_rev = null, bool autorename = true, string asTeamMember = null)
