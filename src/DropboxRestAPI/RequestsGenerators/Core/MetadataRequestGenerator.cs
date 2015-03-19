@@ -311,7 +311,7 @@ namespace DropboxRestAPI.RequestsGenerators.Core
         }
 
 
-        public IRequest ChunkedUpload(byte[] content, int contentOffset, int count, string uploadId = null, long? offset = null, string asTeamMember = null)
+        public IRequest ChunkedUpload(byte[] content, string uploadId = null, long? offset = null, string asTeamMember = null)
         {
             var request = new Request
                 {
@@ -325,7 +325,7 @@ namespace DropboxRestAPI.RequestsGenerators.Core
             if (offset != null)
                 request.AddParameter("offset", offset.ToString());
 
-            HttpContent httpContent = new ByteArrayContent(content, 0, count);
+            HttpContent httpContent = new ByteArrayContent(content, 0, content.Length);
             request.Content = httpContent;
 
             return request;

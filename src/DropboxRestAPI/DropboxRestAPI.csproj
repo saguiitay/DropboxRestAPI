@@ -56,6 +56,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LargeFileUploader.cs" />
     <Compile Include="Models\Business\Event.cs" />
     <Compile Include="Models\Business\EventInfo.cs" />
     <Compile Include="Models\Core\DeltaCursor.cs" />

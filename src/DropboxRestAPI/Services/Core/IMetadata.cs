@@ -302,8 +302,6 @@ namespace DropboxRestAPI.Services.Core
         /// A chunk of data from the file being uploaded. If resuming, the chunk should begin at the number of bytes into the file
         /// that equals the offset.
         /// </param>
-        /// <param name="contentOffset">The offset, in bytes, in the content.</param>
-        /// <param name="count">The number of bytes in the content starting from the offset parameter.</param>
         /// <param name="uploadId">
         /// The unique ID of the in-progress upload on the server. If left blank, the server will create a
         /// new upload session.
@@ -314,7 +312,7 @@ namespace DropboxRestAPI.Services.Core
         /// </param>
         /// <param name="asTeamMember">Specify the member_id of the user that the app wants to act on.</param>
         /// <returns>Details of the upload chunk</returns>
-        Task<ChunkedUpload> ChunkedUploadAsync(byte[] content, int contentOffset, int count, string uploadId = null, long? offset = null, string asTeamMember = null);
+        Task<ChunkedUpload> ChunkedUploadAsync(byte[] content, string uploadId = null, long? offset = null, string asTeamMember = null);
 
         /// <summary>
         /// Completes an upload initiated by the /chunked_upload method. Saves a file uploaded via /chunked_upload to a user's Dropbox.
@@ -344,7 +342,7 @@ namespace DropboxRestAPI.Services.Core
         /// </param>
         /// <param name="asTeamMember">Specify the member_id of the user that the app wants to act on.</param>
         /// <returns>The metadata for the uploaded file.</returns>
-        Task<Metadata> CommitChunkedUploadAsync(string path, string uploadId, string locale = null, bool overwrite = true, string parent_rev = null, bool autorename = true, string asTeamMember = null);
+        Task<MetaData> CommitChunkedUploadAsync(string path, string uploadId, string locale = null, bool overwrite = true, string parent_rev = null, bool autorename = true, string asTeamMember = null);
 
         /// <summary>
         /// Returns a list of all shared folders the authenticated user has access to or metadata about a specific shared folder.
