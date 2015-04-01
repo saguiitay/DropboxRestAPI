@@ -163,12 +163,9 @@ namespace DropboxRestAPI.Services.Core
 
         public async Task<Stream> ThumbnailsAsync(string path, string format = "jpeg", string size = "s", string asTeamMember = null)
         {
-            using (var restResponse = await _requestExecuter.Execute(() => _requestGenerator.Thumbnails(_options.Root, path, format, size, asTeamMember)).ConfigureAwait(false))
-            {
-                await _requestExecuter.CheckForError(restResponse, false).ConfigureAwait(false);
+            var restResponse = await _requestExecuter.Execute(() => _requestGenerator.Thumbnails(_options.Root, path, format, size, asTeamMember)).ConfigureAwait(false);
 
-                return await restResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
-            }
+            return await restResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
         }
 
         public async Task<Preview> PreviewsAsync(string path, string rev = null, string asTeamMember = null)
