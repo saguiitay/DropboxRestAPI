@@ -170,7 +170,14 @@ namespace DropboxRestAPI.Services.Core
 
         public async Task<Preview> PreviewsAsync(string path, string rev = null, string asTeamMember = null)
         {
-            return await _requestExecuter.Execute<Preview>(() => _requestGenerator.Previews(_options.Root, path, rev, asTeamMember)).ConfigureAwait(false);
+            var restResponse = await _requestExecuter.Execute(() => _requestGenerator.Previews(Options.AutoRoot, path, rev, asTeamMember)).ConfigureAwait(false);
+
+            var preview = new Preview
+                {
+                    Content = await restResponse.Content.ReadAsStreamAsync().ConfigureAwait(false),
+                    ContentType = restResponse.Content.Headers.ContentType.MediaType
+                };
+            return preview;
         }
 
         public async Task<ChunkedUpload> ChunkedUploadAsync(byte[] content, int count, string uploadId = null, long? offset = null, string asTeamMember = null)

@@ -269,6 +269,10 @@ namespace DropboxRestAPI.Services.Core
         /// </param>
         /// <param name="asTeamMember">Specify the member_id of the user that the app wants to act on.</param>
         /// <returns></returns>
+        /// <remarks>
+        /// This method currently supports files with the following file extensions: "jpg", "jpeg", "png", "tiff", "tif", "gif", and "bmp".
+        /// Photos that are larger than 20MB in size won't be converted to a thumbnail.
+        /// </remarks>
         Task<Stream> ThumbnailsAsync(string path, string format = "jpeg", string size = "s", string asTeamMember = null);
 
         /// <summary>
@@ -278,6 +282,10 @@ namespace DropboxRestAPI.Services.Core
         /// <param name="rev">The revision of the file to retrieve. This defaults to the most recent revision.</param>
         /// <param name="asTeamMember">Specify the member_id of the user that the app wants to act on.</param>
         /// <returns></returns>
+        /// <remarks>
+        /// Previews are only generated for the files with the following extensions: .doc, .docx, .docm, .ppt, .pps, .ppsx, .ppsm, .pptx, 
+        /// .pptm, .xls, .xlsx, .xlsm, .rtf, .pdf
+        /// </remarks>
         Task<Preview> PreviewsAsync(string path, string rev = null, string asTeamMember = null);
 
         /// <summary>

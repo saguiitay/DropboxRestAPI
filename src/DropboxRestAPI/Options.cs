@@ -27,8 +27,9 @@ namespace DropboxRestAPI
 {
     public class Options
     {
-        private const string SandboxRoot = "sandbox";
-        private const string DropboxRoot = "dropbox";
+        public const string AutoRoot = "auto";
+        public const string SandboxRoot = "sandbox";
+        public const string DropboxRoot = "dropbox";
 
         public Options()
         {
