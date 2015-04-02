@@ -117,7 +117,14 @@ namespace DropboxRestAPI
                 statusCode == HttpStatusCode.BadRequest ||
                 statusCode == HttpStatusCode.ServiceUnavailable)
             {
-                var errorInfo = JsonConvert.DeserializeObject<Error>(content);
+                Error errorInfo = null;
+
+                // Force reading response content in order to retrieve the error message
+                if (!readResponse)
+                    content = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+                if (!string.IsNullOrEmpty(content))
+                    errorInfo = JsonConvert.DeserializeObject<Error>(content);
                 if (errorInfo == null || errorInfo.error == null)
                     throw new HttpException((int) statusCode, content) {Attempts = 1};
 
