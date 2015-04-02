@@ -94,6 +94,7 @@
     <Compile Include="Services\Core\Metadata.cs" />
     <Compile Include="Services\Core\OAuth2.cs" />
     <Compile Include="Models\Core\SharedLink.cs" />
+    <Compile Include="Models\Core\Preview.cs" />
     <Compile Include="Utils\DateTimeUtils.cs" />
     <Compile Include="RequestsGenerators\Business\AuditLogRequestGenerator.cs" />
     <Compile Include="RequestsGenerators\Business\TeamInfoRequestGenerator.cs" />

@@ -278,7 +278,7 @@ namespace DropboxRestAPI.Services.Core
         /// <param name="rev">The revision of the file to retrieve. This defaults to the most recent revision.</param>
         /// <param name="asTeamMember">Specify the member_id of the user that the app wants to act on.</param>
         /// <returns></returns>
-        Task<Stream> PreviewsAsync(string path, string rev = null, string asTeamMember = null);
+        Task<Preview> PreviewsAsync(string path, string rev = null, string asTeamMember = null);
 
         /// <summary>
         /// Uploads large files to Dropbox in multiple chunks. Also has the ability to resume if the upload is interrupted. This
