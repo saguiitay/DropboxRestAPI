@@ -361,6 +361,6 @@ namespace DropboxRestAPI.Services.Core
         /// <returns>
         /// A list of shared folders metadata objects, or the metadata for a specific shared folder if the id parameter is specified.
         /// </returns>
-        Task<IEnumerable<Metadata>> SharedFoldersAsync(string id = null, string asTeamMember = null);
+        Task<IEnumerable<MetaData>> SharedFoldersAsync(string id = null, string asTeamMember = null);
     }
 }
