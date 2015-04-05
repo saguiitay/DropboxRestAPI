@@ -190,9 +190,9 @@ namespace DropboxRestAPI.Services.Core
             return await _requestExecuter.Execute<MetaData>(() => _requestGenerator.CommitChunkedUpload(_options.Root, path, uploadId, locale, overwrite, parent_rev, autorename, asTeamMember)).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<Metadata>> SharedFoldersAsync(string id = null, string asTeamMember = null)
+        public async Task<IEnumerable<MetaData>> SharedFoldersAsync(string id = null, string asTeamMember = null)
         {
-            return await _requestExecuter.Execute<IEnumerable<Metadata>>(() => _requestGenerator.SharedFolders(id, asTeamMember)).ConfigureAwait(false);
+            return await _requestExecuter.Execute<IEnumerable<MetaData>>(() => _requestGenerator.SharedFolders(id, asTeamMember)).ConfigureAwait(false);
         }
 
         #endregion
