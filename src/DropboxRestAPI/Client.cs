@@ -42,7 +42,7 @@ namespace DropboxRestAPI
         public Client(IHttpClientFactory clientFactory, IRequestGenerator requestGenerator, Options options)
         {
             _options = options;
-            var requestExecuter = new RequestExecuter(
+            IRequestExecuter requestExecuter = new RequestExecuter(
                 clientFactory.CreateHttpClient(new HttpClientOptions
                     {
                         AddTokenToRequests = true,
@@ -51,6 +51,14 @@ namespace DropboxRestAPI
                         WriteRequestsPerSecond = options.WriteRequestsPerSecond,
                     }),
                 clientFactory.CreateHttpClient(new HttpClientOptions()));
+
+            if (options.AutoRetry)
+            {
+                requestExecuter = new AutoRetryRequestExecuter(requestExecuter)
+                    {
+                        NumberOfRetries = options.NumberOfRetries
+                    };
+            }
 
             RequestGenerator = requestGenerator;
 
