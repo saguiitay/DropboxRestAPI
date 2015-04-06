@@ -103,7 +103,7 @@ namespace DropboxRestAPI
                     KeyValuePair<string, IEnumerable<string>> retryAfter = httpResponse.Headers.FirstOrDefault(x => x.Key == "Retry-After");
                     if (retryAfter.Value != null && retryAfter.Value.Any())
                     {
-                        throw new RetryLaterException {RetryAfter = int.Parse(retryAfter.Value.First())};
+                        throw new RetryLaterException {RetryAfter = decimal.Parse(retryAfter.Value.First())};
                     }
                 }
                 throw new RetryLaterException {RetryAfter = 10};
