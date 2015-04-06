@@ -32,11 +32,11 @@ namespace DropboxRestAPI.Services.Core
 {
     public class OAuth2 : IOAuth2
     {
-        private readonly RequestExecuter _requestExecuter;
+        private readonly IRequestExecuter _requestExecuter;
         private readonly IOAuth2RequestGenerator _requestGenerator;
         private readonly Options _options;
 
-        public OAuth2(RequestExecuter requestExecuter, IOAuth2RequestGenerator requestGenerator, Options options)
+        public OAuth2(IRequestExecuter requestExecuter, IOAuth2RequestGenerator requestGenerator, Options options)
         {
             _requestExecuter = requestExecuter;
             _requestGenerator = requestGenerator;

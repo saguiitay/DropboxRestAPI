@@ -38,11 +38,11 @@ namespace DropboxRestAPI.Services.Core
     public class Metadata : IMetadata
     {
 
-        private readonly RequestExecuter _requestExecuter;
+        private readonly IRequestExecuter _requestExecuter;
         private readonly IMetadataRequestGenerator _requestGenerator;
         private readonly Options _options;
 
-        public Metadata(RequestExecuter requestExecuter, IMetadataRequestGenerator requestGenerator, Options options)
+        public Metadata(IRequestExecuter requestExecuter, IMetadataRequestGenerator requestGenerator, Options options)
         {
             _requestExecuter = requestExecuter;
             _requestGenerator = requestGenerator;

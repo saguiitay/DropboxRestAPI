@@ -36,7 +36,7 @@ using Newtonsoft.Json;
 
 namespace DropboxRestAPI
 {
-    public class RequestExecuter
+    public class RequestExecuter : IRequestExecuter
     {
         private readonly HttpClient _clientContent;
         private readonly HttpClient _clientOAuth;

@@ -31,11 +31,11 @@ namespace DropboxRestAPI.Services.Core
 {
     public class FileOperations : IFileOperations
     {
-        private readonly RequestExecuter _requestExecuter;
+        private readonly IRequestExecuter _requestExecuter;
         private readonly IFileOperationsRequestGenerator _requestGenerator;
         private readonly Options _options;
 
-        public FileOperations(RequestExecuter requestExecuter, IFileOperationsRequestGenerator requestGenerator, Options options)
+        public FileOperations(IRequestExecuter requestExecuter, IFileOperationsRequestGenerator requestGenerator, Options options)
         {
             _requestExecuter = requestExecuter;
             _requestGenerator = requestGenerator;
