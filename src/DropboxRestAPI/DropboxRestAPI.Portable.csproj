@@ -49,6 +49,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoRetryRequestExecuter.cs" />
+    <Compile Include="IRequestExecuter.cs" />
     <Compile Include="LargeFileUploader.cs" />
     <Compile Include="Models\Business\Event.cs" />
     <Compile Include="Models\Business\EventInfo.cs" />
