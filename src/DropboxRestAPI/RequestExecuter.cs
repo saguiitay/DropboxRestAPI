@@ -25,6 +25,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -96,17 +97,21 @@ namespace DropboxRestAPI
             if (statusCode == 0)
                 throw new HttpException((int) statusCode, content) {Attempts = 1};
 
-            if ((int) statusCode == 429)
+            if ((int)statusCode == 429 || statusCode == HttpStatusCode.ServiceUnavailable)
             {
                 if (httpResponse.Headers != null)
                 {
                     KeyValuePair<string, IEnumerable<string>> retryAfter = httpResponse.Headers.FirstOrDefault(x => x.Key == "Retry-After");
                     if (retryAfter.Value != null && retryAfter.Value.Any())
                     {
-                        throw new RetryLaterException {RetryAfter = decimal.Parse(retryAfter.Value.First())};
+                        throw new RetryLaterException
+                            {
+                                RetryAfter = decimal.Parse(retryAfter.Value.First(), CultureInfo.InvariantCulture)
+                            };
                     }
                 }
-                throw new RetryLaterException {RetryAfter = 10};
+                if ((int)statusCode == 429)
+                    throw new RetryLaterException {RetryAfter = 10};
             }
             if ((int) statusCode == 507)
             {
