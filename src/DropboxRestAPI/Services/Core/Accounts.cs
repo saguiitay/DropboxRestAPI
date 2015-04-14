@@ -31,10 +31,10 @@ namespace DropboxRestAPI.Services.Core
 {
     public class Accounts : IAccounts
     {
-        private readonly RequestExecuter _requestExecuter;
+        private readonly IRequestExecuter _requestExecuter;
         private readonly IAccountsRequestGenerator _requestGenerator;
 
-        public Accounts(RequestExecuter requestExecuter, IAccountsRequestGenerator requestGenerator)
+        public Accounts(IRequestExecuter requestExecuter, IAccountsRequestGenerator requestGenerator)
         {
             _requestExecuter = requestExecuter;
             _requestGenerator = requestGenerator;

@@ -33,10 +33,10 @@ namespace DropboxRestAPI.Services.Business
     public class AuditLog : IAuditLog
     {
         private readonly Options _options;
-        private readonly RequestExecuter _requestExecuter;
+        private readonly IRequestExecuter _requestExecuter;
         private readonly IAuditLogRequestGenerator _requestGenerator;
 
-        public AuditLog(RequestExecuter requestExecuter, IAuditLogRequestGenerator requestGenerator, Options options)
+        public AuditLog(IRequestExecuter requestExecuter, IAuditLogRequestGenerator requestGenerator, Options options)
         {
             _requestGenerator = requestGenerator;
             _options = options;

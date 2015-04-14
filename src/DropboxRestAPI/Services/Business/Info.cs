@@ -33,10 +33,10 @@ namespace DropboxRestAPI.Services.Business
     public class Info : IInfo
     {
         private readonly Options _options;
-        private readonly RequestExecuter _requestExecuter;
+        private readonly IRequestExecuter _requestExecuter;
         private readonly ITeamInfoRequestGenerator _requestGenerator;
 
-        public Info(RequestExecuter requestExecuter, ITeamInfoRequestGenerator requestGenerator, Options options)
+        public Info(IRequestExecuter requestExecuter, ITeamInfoRequestGenerator requestGenerator, Options options)
         {
             _requestGenerator = requestGenerator;
             _options = options;

@@ -34,6 +34,7 @@ namespace DropboxRestAPI
         public Options()
         {
             ChunkSize = 4*1024*1024;
+            NumberOfRetries = 5;
         }
 
         /// <summary>
@@ -67,7 +68,14 @@ namespace DropboxRestAPI
         /// </summary>
         public float? WriteRequestsPerSecond { get; set; }
 
-
+        /// <summary>
+        /// Perform automatic retries when encountering 429 Too Many Requests responses.
+        /// </summary>
+        public bool AutoRetry { get; set; }
+        /// <summary>
+        /// Number of retries to perform when encountering 429 Too Many Requests responses.
+        /// </summary>
+        public int NumberOfRetries { get; set; }
        
 
         /// <summary>

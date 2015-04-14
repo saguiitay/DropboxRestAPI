@@ -43,6 +43,6 @@ namespace DropboxRestAPI.Models.Exceptions
         {
         }
 
-        public int? RetryAfter { get; set; }
+        public decimal? RetryAfter { get; set; }
     }
 }

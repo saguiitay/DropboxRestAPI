@@ -34,7 +34,7 @@ namespace DropboxRestAPI.Services.Core
         public IMetadata Metadata { get; private set; }
         public IFileOperations FileOperations { get; private set; }
 
-        public Core(RequestExecuter requestExecuter, ICoreRequestGenerator requestGenerator, Options options)
+        public Core(IRequestExecuter requestExecuter, ICoreRequestGenerator requestGenerator, Options options)
         {
             OAuth2 = new OAuth2(requestExecuter, requestGenerator.OAuth2, options);
             Accounts = new Accounts(requestExecuter, requestGenerator.Accounts);

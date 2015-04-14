@@ -29,7 +29,7 @@ namespace DropboxRestAPI.Services.Business
 {
     public class Business : IBusiness
     {
-        public Business(RequestExecuter requestExecuter, IRequestGenerator requestGenerator, Options options)
+        public Business(IRequestExecuter requestExecuter, IRequestGenerator requestGenerator, Options options)
         {
             Info = new Info(requestExecuter, requestGenerator.Business.TeamInfo, options);
             Members = new Members(requestExecuter, requestGenerator.Business.TeamMembers, options);

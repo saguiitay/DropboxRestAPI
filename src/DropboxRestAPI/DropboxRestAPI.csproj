@@ -57,6 +57,10 @@
     <Reference Include="System.Net.Http.WebRequest" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoRetryRequestExecuter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IRequestExecuter.cs" />
     <Compile Include="LargeFileUploader.cs" />
     <Compile Include="Models\Business\Event.cs" />
     <Compile Include="Models\Business\EventInfo.cs" />
