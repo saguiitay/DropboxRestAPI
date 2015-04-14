@@ -37,6 +37,6 @@ namespace DropboxRestAPI.Models.Core
         /// <summary>
         /// If endpoint is called by a Dropbox for Business app , member_id of the owner.
         /// </summary>
-        public int member_id { get; set; }
+        public string member_id { get; set; }
     }
 }

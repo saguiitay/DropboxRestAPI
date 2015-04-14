@@ -37,7 +37,7 @@ namespace DropboxRestAPI.Models.Core
         /// <summary>
         /// If endpoint is called by a Dropbox for Business app , member_id of the user.
         /// </summary>
-        public int member_id { get; set; }
+        public string member_id { get; set; }
         /// <summary>
         /// If the linked account is a member of a Dropbox for Business team, whether the user is on the same team as the linked account
         /// </summary>
