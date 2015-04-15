@@ -24,6 +24,7 @@
 
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using DropboxRestAPI.Models.Core;
 
@@ -60,7 +61,7 @@ namespace DropboxRestAPI.Services.Core
         /// <returns>
         /// Address to the web page that lets the user sign in to Dropbox and authorize your app
         /// </returns>
-        Task<Uri> AuthorizeAsync(string response_type, string state = null, bool force_reapprove = false, bool disable_signup = false);
+        Task<Uri> AuthorizeAsync(string response_type, string state = null, bool force_reapprove = false, bool disable_signup = false, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// This endpoint only applies to apps using the authorization code flow. An app calls this endpoint to acquire a bearer
@@ -70,6 +71,6 @@ namespace DropboxRestAPI.Services.Core
         /// <returns>
         /// An access token (access_token), token type (token_type), and Dropbox user ID (uid). The token type will always be "bearer".
         /// </returns>
-        Task<Token> TokenAsync(string code);
+        Task<Token> TokenAsync(string code, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

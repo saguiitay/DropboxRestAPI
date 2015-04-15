@@ -23,6 +23,7 @@
  */
 
 
+using System.Threading;
 using System.Threading.Tasks;
 using DropboxRestAPI.Models.Core;
 
@@ -39,6 +40,6 @@ namespace DropboxRestAPI.Services.Core
         /// <returns>
         /// User account information.
         /// </returns>
-        Task<AccountInfo> AccountInfoAsync(string locale = null, string asTeamMember = null);
+        Task<AccountInfo> AccountInfoAsync(string locale = null, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

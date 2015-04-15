@@ -24,6 +24,7 @@
 
 
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using DropboxRestAPI.Models.Business;
 using DropboxRestAPI.RequestsGenerators.Business;
@@ -43,24 +44,24 @@ namespace DropboxRestAPI.Services.Business
             _requestExecuter = requestExecuter;
         }
 
-        public async Task<TeamInfo> GetInfoAsync()
+        public async Task<TeamInfo> GetInfoAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _requestExecuter.Execute<TeamInfo>(() => _requestGenerator.GetInfo()).ConfigureAwait(false);
+            return await _requestExecuter.Execute<TeamInfo>(() => _requestGenerator.GetInfo(), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<Models.Business.Members> GetMembersAsync(int limit = 1000, string cursor = null)
+        public async Task<Models.Business.Members> GetMembersAsync(int limit = 1000, string cursor = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _requestExecuter.Execute<Models.Business.Members>(() => _requestGenerator.GetMembers(limit, cursor)).ConfigureAwait(false);
+            return await _requestExecuter.Execute<Models.Business.Members>(() => _requestGenerator.GetMembers(limit, cursor), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<MemberInfo> GetMemberInfoAsync(string member_id = null, string email = null, string external_id = null)
+        public async Task<MemberInfo> GetMemberInfoAsync(string member_id = null, string email = null, string external_id = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _requestExecuter.Execute<MemberInfo>(() => _requestGenerator.GetMemberInfo(member_id, email, external_id)).ConfigureAwait(false);
+            return await _requestExecuter.Execute<MemberInfo>(() => _requestGenerator.GetMemberInfo(member_id, email, external_id), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<MemberInfo>> GetMembersInfoBatchAsync(string[] member_ids = null, string[] emails = null, string[] external_ids = null)
+        public async Task<IEnumerable<MemberInfo>> GetMembersInfoBatchAsync(string[] member_ids = null, string[] emails = null, string[] external_ids = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _requestExecuter.Execute<IEnumerable<MemberInfo>>(() => _requestGenerator.GetMembersInfoBatch(member_ids, emails, external_ids)).ConfigureAwait(false);
+            return await _requestExecuter.Execute<IEnumerable<MemberInfo>>(() => _requestGenerator.GetMembersInfoBatch(member_ids, emails, external_ids), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
     }
 }

@@ -23,6 +23,7 @@
  */
 
 
+using System.Threading;
 using System.Threading.Tasks;
 using DropboxRestAPI.Models.Core;
 
@@ -39,7 +40,7 @@ namespace DropboxRestAPI.Services.Core
         /// <param name="locale">The metadata returned will have its size field translated based on the given locale.</param>
         /// <param name="asTeamMember">Specify the member_id of the user that the app wants to act on.</param>
         /// <returns>Metadata for the copy of the file or folder.</returns>
-        Task<MetaData> CopyAsync(string from_path, string to_path, string from_copy_ref = null, string locale = null, string asTeamMember = null);
+        Task<MetaData> CopyAsync(string from_path, string to_path, string from_copy_ref = null, string locale = null, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Creates a folder.
@@ -48,7 +49,7 @@ namespace DropboxRestAPI.Services.Core
         /// <param name="locale">The metadata returned will have its size field translated based on the given locale.</param>
         /// <param name="asTeamMember">Specify the member_id of the user that the app wants to act on.</param>
         /// <returns>Metadata for the new folder.</returns>
-        Task<MetaData> CreateFolderAsync(string path, string locale = null, string asTeamMember = null);
+        Task<MetaData> CreateFolderAsync(string path, string locale = null, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Deletes a file or folder.
@@ -57,7 +58,7 @@ namespace DropboxRestAPI.Services.Core
         /// <param name="locale">The metadata returned will have its size field translated based on the given locale.</param>
         /// <param name="asTeamMember">Specify the member_id of the user that the app wants to act on.</param>
         /// <returns>Metadata for the deleted file or folder.</returns>
-        Task<MetaData> DeleteAsync(string path, string locale = null, string asTeamMember = null);
+        Task<MetaData> DeleteAsync(string path, string locale = null, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Moves a file or folder to a new location.
@@ -67,6 +68,6 @@ namespace DropboxRestAPI.Services.Core
         /// <param name="locale">The metadata returned will have its size field translated based on the given locale.</param>
         /// <param name="asTeamMember">Specify the member_id of the user that the app wants to act on.</param>
         /// <returns>Metadata for the moved file or folder.</returns>
-        Task<MetaData> MoveAsync(string from_path, string to_path, string locale = null, string asTeamMember = null);
+        Task<MetaData> MoveAsync(string from_path, string to_path, string locale = null, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

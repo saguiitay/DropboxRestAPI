@@ -24,6 +24,7 @@
 
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using DropboxRestAPI.Models.Business;
 
@@ -47,7 +48,7 @@ namespace DropboxRestAPI.Services.Business
         /// Data about a team's storage usage. Each result is represented as an array ordered by date, where the first value
         /// corresponds to the data on the start_date. Each subsequent array value represents one day's data in that series.
         /// </returns>
-        Task<StorageInfo> GetStorageAsync(DateTime? start_date, DateTime? end_date);
+        Task<StorageInfo> GetStorageAsync(DateTime? start_date, DateTime? end_date, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Retrieves reporting data about a team's user activity.
@@ -65,7 +66,7 @@ namespace DropboxRestAPI.Services.Business
         /// Data about a team's user activity. Each result is represented as an array ordered by date, where the first value
         /// corresponds to the data on the start_date. Each subsequent array value represents one day's data in that series.
         /// </returns>
-        Task<ActivityInfo> GetActivityAsync(DateTime? start_date, DateTime? end_date);
+        Task<ActivityInfo> GetActivityAsync(DateTime? start_date, DateTime? end_date, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Retrieves reporting data about a team's membership.
@@ -83,7 +84,7 @@ namespace DropboxRestAPI.Services.Business
         /// Data about a team's membership. Each result is represented as an array ordered by date, where the first value corresponds
         /// to the data on the start_date. Each subsequent array value represents one day's data in that series.
         /// </returns>
-        Task<MembershipInfo> GetMembershipAsync(DateTime? start_date, DateTime? end_date);
+        Task<MembershipInfo> GetMembershipAsync(DateTime? start_date, DateTime? end_date, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Retrieves reporting data about a team's linked devices.
@@ -102,6 +103,6 @@ namespace DropboxRestAPI.Services.Business
         /// a team member's Dropbox for Business account. Each result is represented as an array ordered by date, where the first
         /// value corresponds to the data on the start_date. Each subsequent array value represents one day's data in that series.
         /// </returns>
-        Task<DevicesInfo> GetDevicesAsync(DateTime? start_date, DateTime? end_date);
+        Task<DevicesInfo> GetDevicesAsync(DateTime? start_date, DateTime? end_date, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

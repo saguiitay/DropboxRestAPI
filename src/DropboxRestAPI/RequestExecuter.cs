@@ -29,6 +29,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using DropboxRestAPI.Models;
 using DropboxRestAPI.Models.Exceptions;
@@ -50,12 +51,12 @@ namespace DropboxRestAPI
 
         #region Request execution utilities methods
 
-        public async Task<T> ExecuteAuthorization<T>(IRequest restRequest) where T : new()
+        public async Task<T> ExecuteAuthorization<T>(IRequest restRequest, CancellationToken cancellationToken = default(CancellationToken)) where T : new()
         {
-            return await Execute<T>(() => restRequest, _clientOAuth).ConfigureAwait(false);
+            return await Execute<T>(() => restRequest, _clientOAuth, cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<HttpResponseMessage> Execute(Func<IRequest> restRequest, HttpClient restClient = null)
+        public async Task<HttpResponseMessage> Execute(Func<IRequest> restRequest, HttpClient restClient = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (restClient == null)
                 restClient = _clientContent;
@@ -63,20 +64,20 @@ namespace DropboxRestAPI
             using (IRequest request = restRequest())
             {
 
-                HttpResponseMessage restResponse = await restClient.Execute(request).ConfigureAwait(false);
+                HttpResponseMessage restResponse = await restClient.Execute(request, cancellationToken).ConfigureAwait(false);
                 await CheckForError(restResponse, false).ConfigureAwait(false);
 
                 return restResponse;
             }
         }
 
-        public async Task<T> Execute<T>(Func<IRequest> restRequest, HttpClient restClient = null)
+        public async Task<T> Execute<T>(Func<IRequest> restRequest, HttpClient restClient = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (restClient == null)
                 restClient = _clientContent;
 
             using (IRequest request = restRequest())
-            using (HttpResponseMessage restResponse = await restClient.Execute(request).ConfigureAwait(false))
+            using (HttpResponseMessage restResponse = await restClient.Execute(request, cancellationToken).ConfigureAwait(false))
             {
                 string content = await CheckForError(restResponse).ConfigureAwait(false);
 

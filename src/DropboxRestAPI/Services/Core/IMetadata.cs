@@ -25,6 +25,7 @@
 
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using DropboxRestAPI.Models.Core;
 
@@ -40,7 +41,7 @@ namespace DropboxRestAPI.Services.Core
         /// <param name="rev">The revision of the file to retrieve. This defaults to the most recent revision.</param>
         /// <param name="asTeamMember">Specify the member_id of the user that the app wants to act on.</param>
         /// <returns>The specified file's contents at the requested revision.</returns>
-        Task<MetaData> FilesAsync(string path, Stream targetStream, string rev = null, string asTeamMember = null);
+        Task<MetaData> FilesAsync(string path, Stream targetStream, string rev = null, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Uploads a file using PUT semantics.
@@ -67,7 +68,7 @@ namespace DropboxRestAPI.Services.Core
         /// </param>
         /// <param name="asTeamMember">Specify the member_id of the user that the app wants to act on.</param>
         /// <returns>The metadata for the uploaded file. </returns>
-        Task<MetaData> FilesPutAsync(Stream content, string path, string locale = null, bool overwrite = true, string parent_rev = null, bool autorename = true, string asTeamMember = null);
+        Task<MetaData> FilesPutAsync(Stream content, string path, string locale = null, bool overwrite = true, string parent_rev = null, bool autorename = true, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Retrieves file and folder metadata.
@@ -107,7 +108,7 @@ namespace DropboxRestAPI.Services.Core
         /// The metadata for the file or folder at the given &lt;path&gt;. If &lt;path&gt; represents a folder and the list parameter is
         /// true, the metadata will also include a listing of metadata for the folder's contents.
         /// </returns>
-        Task<MetaData> MetadataAsync(string path, int file_limit = 10000, string hash = null, bool list = true, bool include_deleted = false, string rev = null, string locale = null, bool include_media_info = false, bool include_membership = false, string asTeamMember = null);
+        Task<MetaData> MetadataAsync(string path, int file_limit = 10000, string hash = null, bool list = true, bool include_deleted = false, string rev = null, string locale = null, bool include_media_info = false, bool include_membership = false, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// A way of letting you keep up with changes to files and folders in a user's Dropbox. You can periodically call /delta to
@@ -134,7 +135,7 @@ namespace DropboxRestAPI.Services.Core
         /// </param>
         /// <param name="asTeamMember">Specify the member_id of the user that the app wants to act on.</param>
         /// <returns>List of changes to files and folders in a user's Dropbox.</returns>
-        Task<Entries> DeltaAsync(string cursor = null, string locale = null, string path_prefix = null, bool include_media_info = false, string asTeamMember = null);
+        Task<Entries> DeltaAsync(string cursor = null, string locale = null, string path_prefix = null, bool include_media_info = false, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// A way to quickly get a cursor for the server's state, for use with /delta. Unlike /delta, /delta/latest_cursor does not
@@ -147,7 +148,7 @@ namespace DropboxRestAPI.Services.Core
         /// <param name="include_media_info">If true, the returned cursor will be encoded with include_media_info set to true for use with /delta.</param>
         /// <param name="asTeamMember">Specify the member_id of the user that the app wants to act on.</param>
         /// <returns>The latest server state, as would be returned by /delta when has_more is false.</returns>
-        Task<DeltaCursor> DeltaLatestCursorAsync(string path_prefix = null, bool include_media_info = false, string asTeamMember = null);
+        Task<DeltaCursor> DeltaLatestCursorAsync(string path_prefix = null, bool include_media_info = false, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken));
         
         /// <summary>
         /// A long-poll endpoint to wait for changes on an account. In conjunction with /delta, this call gives you a low-latency way
@@ -169,7 +170,7 @@ namespace DropboxRestAPI.Services.Core
         /// whether new changes are available. If this value is true, you should call /delta to retrieve the changes. If this value
         /// is false, it means the call to /longpoll_delta timed out.
         /// </returns>
-        Task<LongPollDelta> LongPollDeltaAsync(string cursor = null, int timeout = 30, string asTeamMember = null);
+        Task<LongPollDelta> LongPollDeltaAsync(string cursor = null, int timeout = 30, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Obtains metadata for the previous revisions of a file. 
@@ -181,7 +182,7 @@ namespace DropboxRestAPI.Services.Core
         /// <param name="locale">The metadata returned will have its size field translated based on the given locale.</param>
         /// <param name="asTeamMember">Specify the member_id of the user that the app wants to act on.</param>
         /// <returns>A list of revisions.</returns>
-        Task<IEnumerable<Metadata>>  RevisionsAsync(string path, int rev_limit = 10, string locale = null, string asTeamMember = null);
+        Task<IEnumerable<Metadata>> RevisionsAsync(string path, int rev_limit = 10, string locale = null, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Restores a file path to a previous revision.
@@ -192,7 +193,7 @@ namespace DropboxRestAPI.Services.Core
         /// <param name="locale">The metadata returned will have its size field translated based on the given locale.</param>
         /// <param name="asTeamMember">Specify the member_id of the user that the app wants to act on.</param>
         /// <returns>The metadata of the restored file.</returns>
-        Task<Metadata> RestoreAsync(string path, string rev = null, string locale = null, string asTeamMember = null);
+        Task<Metadata> RestoreAsync(string path, string rev = null, string locale = null, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Returns metadata for all files and folders whose filename contains the given search string as a substring.
@@ -211,7 +212,7 @@ namespace DropboxRestAPI.Services.Core
         /// <param name="include_membership">If true, metadata for a shared folder will include a list of the members of the shared folder.</param>
         /// <param name="asTeamMember">Specify the member_id of the user that the app wants to act on.</param>
         /// <returns>List of metadata entries for any matching files and folders. </returns>
-        Task<IEnumerable<MetaData>>  SearchAsync(string path, string query, int file_limit = 1000, bool include_deleted = false, string locale = null, bool include_membership = false, string asTeamMember = null);
+        Task<IEnumerable<MetaData>> SearchAsync(string path, string query, int file_limit = 1000, bool include_deleted = false, string locale = null, bool include_membership = false, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken));
         
         /// <summary>
         /// Creates and returns a shared link to a file or folder.
@@ -224,7 +225,7 @@ namespace DropboxRestAPI.Services.Core
         /// </param>
         /// <param name="asTeamMember">Specify the member_id of the user that the app wants to act on.</param>
         /// <returns>The shared link as well as information about the link's visibility and expiration</returns>
-        Task<SharedLink> SharesAsync(string path, string locale = null, bool short_url = true, string asTeamMember = null);
+        Task<SharedLink> SharesAsync(string path, string locale = null, bool short_url = true, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Returns a link directly to a file.
@@ -236,7 +237,7 @@ namespace DropboxRestAPI.Services.Core
         /// <param name="locale">Use to specify language settings for user error messages and other language specific text.</param>
         /// <param name="asTeamMember">Specify the member_id of the user that the app wants to act on.</param>
         /// <returns> url that serves the media directly. Also returns the link's expiration date.</returns>
-        Task<MediaLink> MediaAsync(string path, string locale = null, string asTeamMember = null);
+        Task<MediaLink> MediaAsync(string path, string locale = null, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Creates and returns a copy_ref to a file. This reference string can be used to copy that file to another user's Dropbox by
@@ -248,7 +249,7 @@ namespace DropboxRestAPI.Services.Core
         /// A copy_ref to the specified file. For compatibility reasons, it returns the link's expiration date. All links are currently
         /// set to expire far enough in the future so that expiration is effectively not an issue.
         /// </returns>
-        Task<CopyRef> CopyRefAsync(string path, string asTeamMember = null);
+        Task<CopyRef> CopyRefAsync(string path, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Gets a thumbnail for an image. 
@@ -273,7 +274,7 @@ namespace DropboxRestAPI.Services.Core
         /// This method currently supports files with the following file extensions: "jpg", "jpeg", "png", "tiff", "tif", "gif", and "bmp".
         /// Photos that are larger than 20MB in size won't be converted to a thumbnail.
         /// </remarks>
-        Task<Stream> ThumbnailsAsync(string path, string format = "jpeg", string size = "s", string asTeamMember = null);
+        Task<Stream> ThumbnailsAsync(string path, string format = "jpeg", string size = "s", string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Gets a preview for a file. 
@@ -286,7 +287,7 @@ namespace DropboxRestAPI.Services.Core
         /// Previews are only generated for the files with the following extensions: .doc, .docx, .docm, .ppt, .pps, .ppsx, .ppsm, .pptx, 
         /// .pptm, .xls, .xlsx, .xlsm, .rtf, .pdf
         /// </remarks>
-        Task<Preview> PreviewsAsync(string path, string rev = null, string asTeamMember = null);
+        Task<Preview> PreviewsAsync(string path, string rev = null, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Uploads large files to Dropbox in multiple chunks. Also has the ability to resume if the upload is interrupted. This
@@ -321,7 +322,7 @@ namespace DropboxRestAPI.Services.Core
         /// </param>
         /// <param name="asTeamMember">Specify the member_id of the user that the app wants to act on.</param>
         /// <returns>Details of the upload chunk</returns>
-        Task<ChunkedUpload> ChunkedUploadAsync(byte[] content, int count, string uploadId = null, long? offset = null, string asTeamMember = null);
+        Task<ChunkedUpload> ChunkedUploadAsync(byte[] content, int count, string uploadId = null, long? offset = null, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Completes an upload initiated by the /chunked_upload method. Saves a file uploaded via /chunked_upload to a user's Dropbox.
@@ -351,7 +352,7 @@ namespace DropboxRestAPI.Services.Core
         /// </param>
         /// <param name="asTeamMember">Specify the member_id of the user that the app wants to act on.</param>
         /// <returns>The metadata for the uploaded file.</returns>
-        Task<MetaData> CommitChunkedUploadAsync(string path, string uploadId, string locale = null, bool overwrite = true, string parent_rev = null, bool autorename = true, string asTeamMember = null);
+        Task<MetaData> CommitChunkedUploadAsync(string path, string uploadId, string locale = null, bool overwrite = true, string parent_rev = null, bool autorename = true, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Returns a list of all shared folders the authenticated user has access to or metadata about a specific shared folder.
@@ -361,6 +362,6 @@ namespace DropboxRestAPI.Services.Core
         /// <returns>
         /// A list of shared folders metadata objects, or the metadata for a specific shared folder if the id parameter is specified.
         /// </returns>
-        Task<IEnumerable<MetaData>> SharedFoldersAsync(string id = null, string asTeamMember = null);
+        Task<IEnumerable<MetaData>> SharedFoldersAsync(string id = null, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

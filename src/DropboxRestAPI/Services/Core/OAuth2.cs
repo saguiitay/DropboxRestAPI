@@ -24,6 +24,7 @@
 
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using DropboxRestAPI.Models.Core;
 using DropboxRestAPI.RequestsGenerators.Core;
@@ -45,15 +46,15 @@ namespace DropboxRestAPI.Services.Core
 
         #region Implementation of IOAuth2
 
-        public async Task<Uri> AuthorizeAsync(string response_type, string state = null, bool force_reapprove = false, bool disable_signup = false)
+        public async Task<Uri> AuthorizeAsync(string response_type, string state = null, bool force_reapprove = false, bool disable_signup = false, CancellationToken cancellationToken = default(CancellationToken))
         {
             var request = _requestGenerator.Authorize(response_type, _options.ClientId, _options.RedirectUri, state, force_reapprove, disable_signup);
             return request.BuildUri();
         }
 
-        public async Task<Token> TokenAsync(string code)
+        public async Task<Token> TokenAsync(string code, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var token = await _requestExecuter.Execute<Token>(() => _requestGenerator.AccessToken(_options.ClientId, _options.ClientSecret, _options.RedirectUri, code)).ConfigureAwait(false);
+            var token = await _requestExecuter.Execute<Token>(() => _requestGenerator.AccessToken(_options.ClientId, _options.ClientSecret, _options.RedirectUri, code), cancellationToken: cancellationToken).ConfigureAwait(false);
 
             _options.AccessToken = token.access_token;
             return token;

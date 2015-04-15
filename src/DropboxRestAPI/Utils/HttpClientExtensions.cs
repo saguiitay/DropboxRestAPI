@@ -24,13 +24,14 @@
 
 
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DropboxRestAPI.Utils
 {
     public static class HttpClientExtensions
     {
-        public static async Task<HttpResponseMessage> Execute(this HttpClient client, IRequest request)
+        public static async Task<HttpResponseMessage> Execute(this HttpClient client, IRequest request, CancellationToken cancellationToken = default(CancellationToken))
         {
             var requestMessage = new HttpRequestMessage(request.Method, request.BuildUri());
             if (request.Content != null)
@@ -44,7 +45,7 @@ namespace DropboxRestAPI.Utils
                 }
             }
 
-            return await client.SendAsync(requestMessage, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+            return await client.SendAsync(requestMessage, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
         }
     }
 }

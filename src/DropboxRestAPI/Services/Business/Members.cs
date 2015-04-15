@@ -23,6 +23,7 @@
  */
 
 
+using System.Threading;
 using System.Threading.Tasks;
 using DropboxRestAPI.Models.Business;
 using DropboxRestAPI.RequestsGenerators.Business;
@@ -43,31 +44,31 @@ namespace DropboxRestAPI.Services.Business
         }
 
         public async Task<MemberInfo> AddAsync(string member_email, string member_given_name, string member_surname, string member_external_id = null,
-            bool? send_welcome_email = null)
+            bool? send_welcome_email = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _requestExecuter.Execute<MemberInfo>(() => _requestGenerator.Add(member_email, member_given_name, member_surname, member_external_id, send_welcome_email)).ConfigureAwait(false);
+            return await _requestExecuter.Execute<MemberInfo>(() => _requestGenerator.Add(member_email, member_given_name, member_surname, member_external_id, send_welcome_email), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
         public async Task<MemberInfo> SetProfileAsync(string member_id = null, string external_id = null, string new_email = null,
-            string new_external_id = null)
+            string new_external_id = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _requestExecuter.Execute<MemberInfo>(() => _requestGenerator.SetProfile(member_id, external_id, new_email, new_external_id)).ConfigureAwait(false);
+            return await _requestExecuter.Execute<MemberInfo>(() => _requestGenerator.SetProfile(member_id, external_id, new_email, new_external_id), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<PermissionInfo> SetPermissionsAsync(string member_id = null, string external_id = null, bool? new_is_admin = null)
+        public async Task<PermissionInfo> SetPermissionsAsync(string member_id = null, string external_id = null, bool? new_is_admin = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _requestExecuter.Execute<PermissionInfo>(() => _requestGenerator.SetPermissions(member_id, external_id, new_is_admin)).ConfigureAwait(false);
+            return await _requestExecuter.Execute<PermissionInfo>(() => _requestGenerator.SetPermissions(member_id, external_id, new_is_admin), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
         public async Task RemoveAsync(string member_id = null, string external_id = null, string transfer_dest_member_id = null,
-            string transfer_admin_member_id = null, bool delete_data = true)
+            string transfer_admin_member_id = null, bool delete_data = true, CancellationToken cancellationToken = default(CancellationToken))
         {
             using (
                 var response =
                     await _requestExecuter.Execute(
                             () =>
                                 _requestGenerator.Remove(member_id, external_id, transfer_dest_member_id,
-                                    transfer_admin_member_id, delete_data)).ConfigureAwait(false))
+                                    transfer_admin_member_id, delete_data), cancellationToken: cancellationToken).ConfigureAwait(false))
             {
             }
         }

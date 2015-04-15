@@ -23,6 +23,7 @@
  */
 
 
+using System.Threading;
 using System.Threading.Tasks;
 using DropboxRestAPI.Models.Core;
 using DropboxRestAPI.RequestsGenerators.Core;
@@ -45,24 +46,24 @@ namespace DropboxRestAPI.Services.Core
 
         #region Implementation of IFileOperations
 
-        public async Task<MetaData> CopyAsync(string from_path, string to_path, string from_copy_ref = null, string locale = null, string asTeamMember = null)
+        public async Task<MetaData> CopyAsync(string from_path, string to_path, string from_copy_ref = null, string locale = null, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _requestExecuter.Execute<MetaData>(() => _requestGenerator.Copy(_options.Root, from_path, to_path, from_copy_ref, locale, asTeamMember)).ConfigureAwait(false);
+            return await _requestExecuter.Execute<MetaData>(() => _requestGenerator.Copy(_options.Root, from_path, to_path, from_copy_ref, locale, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<MetaData> CreateFolderAsync(string path, string locale = null, string asTeamMember = null)
+        public async Task<MetaData> CreateFolderAsync(string path, string locale = null, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _requestExecuter.Execute<MetaData>(() => _requestGenerator.CreateFolder(_options.Root, path, locale, asTeamMember)).ConfigureAwait(false);
+            return await _requestExecuter.Execute<MetaData>(() => _requestGenerator.CreateFolder(_options.Root, path, locale, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<MetaData> DeleteAsync(string path, string locale = null, string asTeamMember = null)
+        public async Task<MetaData> DeleteAsync(string path, string locale = null, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _requestExecuter.Execute<MetaData>(() => _requestGenerator.Delete(_options.Root, path, locale, asTeamMember)).ConfigureAwait(false);
+            return await _requestExecuter.Execute<MetaData>(() => _requestGenerator.Delete(_options.Root, path, locale, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<MetaData> MoveAsync(string from_path, string to_path, string locale = null, string asTeamMember = null)
+        public async Task<MetaData> MoveAsync(string from_path, string to_path, string locale = null, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _requestExecuter.Execute<MetaData>(() => _requestGenerator.Move(_options.Root, from_path, to_path, locale, asTeamMember)).ConfigureAwait(false);
+            return await _requestExecuter.Execute<MetaData>(() => _requestGenerator.Move(_options.Root, from_path, to_path, locale, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
         #endregion

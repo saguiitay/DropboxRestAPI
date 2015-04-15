@@ -24,6 +24,7 @@
 
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using DropboxRestAPI.Models.Business;
 using DropboxRestAPI.RequestsGenerators.Business;
@@ -43,24 +44,24 @@ namespace DropboxRestAPI.Services.Business
             _requestExecuter = requestExecuter;
         }
 
-        public async Task<StorageInfo> GetStorageAsync(DateTime? start_date, DateTime? end_date)
+        public async Task<StorageInfo> GetStorageAsync(DateTime? start_date, DateTime? end_date, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _requestExecuter.Execute<StorageInfo>(() => _requestGenerator.GetStorage(start_date, end_date)).ConfigureAwait(false);
+            return await _requestExecuter.Execute<StorageInfo>(() => _requestGenerator.GetStorage(start_date, end_date), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<ActivityInfo> GetActivityAsync(DateTime? start_date, DateTime? end_date)
+        public async Task<ActivityInfo> GetActivityAsync(DateTime? start_date, DateTime? end_date, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _requestExecuter.Execute<ActivityInfo>(() => _requestGenerator.GetActivity(start_date, end_date)).ConfigureAwait(false);
+            return await _requestExecuter.Execute<ActivityInfo>(() => _requestGenerator.GetActivity(start_date, end_date), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<MembershipInfo> GetMembershipAsync(DateTime? start_date, DateTime? end_date)
+        public async Task<MembershipInfo> GetMembershipAsync(DateTime? start_date, DateTime? end_date, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _requestExecuter.Execute<MembershipInfo>(() => _requestGenerator.GetMembership(start_date, end_date)).ConfigureAwait(false);
+            return await _requestExecuter.Execute<MembershipInfo>(() => _requestGenerator.GetMembership(start_date, end_date), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<DevicesInfo> GetDevicesAsync(DateTime? start_date, DateTime? end_date)
+        public async Task<DevicesInfo> GetDevicesAsync(DateTime? start_date, DateTime? end_date, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _requestExecuter.Execute<DevicesInfo>(() => _requestGenerator.GetDevices(start_date, end_date)).ConfigureAwait(false);
+            return await _requestExecuter.Execute<DevicesInfo>(() => _requestGenerator.GetDevices(start_date, end_date), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
     }
 }

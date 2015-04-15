@@ -23,6 +23,7 @@
  */
 
 
+using System.Threading;
 using System.Threading.Tasks;
 using DropboxRestAPI.Models.Core;
 using DropboxRestAPI.RequestsGenerators.Core;
@@ -40,9 +41,9 @@ namespace DropboxRestAPI.Services.Core
             _requestGenerator = requestGenerator;
         }
 
-        public async Task<AccountInfo> AccountInfoAsync(string locale = null, string asTeamMember = null)
+        public async Task<AccountInfo> AccountInfoAsync(string locale = null, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _requestExecuter.Execute<AccountInfo>(() => _requestGenerator.AccountInfo(locale, asTeamMember)).ConfigureAwait(false);
+            return await _requestExecuter.Execute<AccountInfo>(() => _requestGenerator.AccountInfo(locale, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
     }
 }

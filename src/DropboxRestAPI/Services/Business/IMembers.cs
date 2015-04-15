@@ -23,6 +23,7 @@
  */
 
 
+using System.Threading;
 using System.Threading.Tasks;
 using DropboxRestAPI.Models.Business;
 
@@ -54,7 +55,7 @@ namespace DropboxRestAPI.Services.Business
         /// If send_welcome_email is false, no email invitation will be sent to the user. This may be useful for apps using single
         /// sign-on (SSO) flows for onboarding that want to handle Dropbox for Business announcements themselves.
         /// </remarks>
-        Task<MemberInfo> AddAsync(string member_email, string member_given_name, string member_surname, string member_external_id = null, bool? send_welcome_email = null);
+        Task<MemberInfo> AddAsync(string member_email, string member_given_name, string member_surname, string member_external_id = null, bool? send_welcome_email = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Updates a team member's profile.
@@ -69,7 +70,7 @@ namespace DropboxRestAPI.Services.Business
         /// <param name="new_email">new email for member. Must specify either a new_email or new_external_id.</param>
         /// <param name="new_external_id">new external ID for member. Must specify either a new_email or new_external_id.</param>
         /// <returns>Returns the profile of the updated member.</returns>
-        Task<MemberInfo> SetProfileAsync(string member_id = null, string external_id = null, string new_email = null, string new_external_id = null);
+        Task<MemberInfo> SetProfileAsync(string member_id = null, string external_id = null, string new_email = null, string new_external_id = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Updates a team member's permissions.
@@ -79,7 +80,7 @@ namespace DropboxRestAPI.Services.Business
         /// <param name="external_id">external ID. Must specify either a member_id or external_id.</param>
         /// <param name="new_is_admin">change the admin status of the member.</param>
         /// <returns>Returns the member's permissions.</returns>
-        Task<PermissionInfo> SetPermissionsAsync(string member_id = null, string external_id = null, bool? new_is_admin = null);
+        Task<PermissionInfo> SetPermissionsAsync(string member_id = null, string external_id = null, bool? new_is_admin = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Removes a member from a team.
@@ -95,6 +96,6 @@ namespace DropboxRestAPI.Services.Business
         /// <param name="transfer_dest_member_id">files from the deleted member account will be transferred to this member.</param>
         /// <param name="transfer_admin_member_id">errors during the transfer process will be sent via email to the transfer_admin_member_id.</param>
         /// <param name="delete_data">controls if the user's data will be deleted on their linked devices. Default is true.</param>
-        Task RemoveAsync(string member_id = null, string external_id = null, string transfer_dest_member_id = null, string transfer_admin_member_id = null, bool delete_data = true);
+        Task RemoveAsync(string member_id = null, string external_id = null, string transfer_dest_member_id = null, string transfer_admin_member_id = null, bool delete_data = true, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

@@ -24,6 +24,7 @@
 
 
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using DropboxRestAPI.Models.Business;
 
@@ -35,7 +36,7 @@ namespace DropboxRestAPI.Services.Business
         /// Retrieves information about a team.
         /// </summary>
         /// <returns>Information about a team.</returns>
-        Task<TeamInfo> GetInfoAsync();
+        Task<TeamInfo> GetInfoAsync(CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Lists members of a team.
@@ -43,7 +44,7 @@ namespace DropboxRestAPI.Services.Business
         /// <param name="limit">number of results to return per call (default 1000, maximum 1000)</param>
         /// <param name="cursor">encoded value indicating from what point to get the next limit members</param>
         /// <returns>A list of team members.</returns>
-        Task<Models.Business.Members> GetMembersAsync(int limit = 1000, string cursor = null);
+        Task<Models.Business.Members> GetMembersAsync(int limit = 1000, string cursor = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Retrieves information about a team member.
@@ -53,7 +54,7 @@ namespace DropboxRestAPI.Services.Business
         /// <param name="email">email of member</param>
         /// <param name="external_id">external ID of member</param>
         /// <returns>Information about a team member.</returns>
-        Task<MemberInfo> GetMemberInfoAsync(string member_id = null, string email = null, string external_id = null);
+        Task<MemberInfo> GetMemberInfoAsync(string member_id = null, string email = null, string external_id = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Retrieves information about multiple team members.
@@ -63,6 +64,6 @@ namespace DropboxRestAPI.Services.Business
         /// <param name="emails">list of member emails</param>
         /// <param name="external_ids">list of external member IDs</param>
         /// <returns>Information about multiple team members.</returns>
-        Task<IEnumerable<MemberInfo>> GetMembersInfoBatchAsync(string[] member_ids = null, string[] emails = null, string[] external_ids = null);
+        Task<IEnumerable<MemberInfo>> GetMembersInfoBatchAsync(string[] member_ids = null, string[] emails = null, string[] external_ids = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
