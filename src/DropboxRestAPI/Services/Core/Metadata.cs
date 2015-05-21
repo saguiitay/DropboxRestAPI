@@ -89,7 +89,7 @@ namespace DropboxRestAPI.Services.Core
                     if (from >= length)
                         break;
 
-                    using (var restResponse2 = await  _requestExecuter.Execute(() => _requestGenerator.FilesRange(_options.Root, path, from.Value, to.Value - 1, etag, rev, asTeamMember)).ConfigureAwait(false))
+                    using (var restResponse2 = await  _requestExecuter.Execute(() => _requestGenerator.FilesRange(_options.Root, path, from.Value, to.Value - 1, etag, rev, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false))
                     {
                         await restResponse2.Content.CopyToAsync(targetStream).ConfigureAwait(false);
 
