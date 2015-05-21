@@ -63,9 +63,19 @@ namespace DropboxRestAPI
 
             using (IRequest request = restRequest())
             {
+                HttpResponseMessage restResponse = null;
+                try
+                {
+                    restResponse = await restClient.Execute(request, cancellationToken).ConfigureAwait(false);
+                    await CheckForError(restResponse, false).ConfigureAwait(false);
+                }
+                catch (Exception)
+                {
+                    if (restResponse != null)
+                        restResponse.Dispose();
 
-                HttpResponseMessage restResponse = await restClient.Execute(request, cancellationToken).ConfigureAwait(false);
-                await CheckForError(restResponse, false).ConfigureAwait(false);
+                    throw;
+                }
 
                 return restResponse;
             }
