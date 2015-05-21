@@ -51,5 +51,7 @@ namespace DropboxRestAPI.Models.Exceptions
         }
 
         public int Code { get; set; }
+        public string ErrorCode { get; set; }
+        public string ErrorDescription { get; set; }
     }
 }

@@ -148,7 +148,11 @@ namespace DropboxRestAPI
                 if (!string.IsNullOrEmpty(errorInfo.error_description))
                     error = string.Format("{0}: {1}", errorInfo.error, errorInfo.error_description);
 
-                throw new ServiceErrorException((int)statusCode, error);
+                throw new ServiceErrorException((int) statusCode, error)
+                    {
+                        ErrorCode = errorInfo.error,
+                        ErrorDescription = errorInfo.error_description
+                    };
             }
             if (statusCode == HttpStatusCode.InternalServerError ||
                 statusCode == HttpStatusCode.BadGateway)
