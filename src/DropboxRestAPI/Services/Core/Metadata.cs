@@ -108,69 +108,69 @@ namespace DropboxRestAPI.Services.Core
 
         public async Task<MetaData> FilesPutAsync(Stream content, string path, string locale = null, bool overwrite = true, string parent_rev = null, bool autorename = true, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _requestExecuter.Execute<MetaData>(() => _requestGenerator.FilesPut(_options.Root, content, path, locale, overwrite, parent_rev, autorename, asTeamMember)).ConfigureAwait(false);
+            return await _requestExecuter.Execute<MetaData>(() => _requestGenerator.FilesPut(_options.Root, content, path, locale, overwrite, parent_rev, autorename, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
         public async Task<MetaData> MetadataAsync(string path, int file_limit = 10000, string hash = null, bool list = true, bool include_deleted = false, string rev = null, string locale = null, bool include_media_info = false, bool include_membership = false, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _requestExecuter.Execute<MetaData>(() => _requestGenerator.Metadata(_options.Root, path, file_limit, hash, list, include_deleted, rev, locale, include_media_info, include_membership, asTeamMember)).ConfigureAwait(false);
+            return await _requestExecuter.Execute<MetaData>(() => _requestGenerator.Metadata(_options.Root, path, file_limit, hash, list, include_deleted, rev, locale, include_media_info, include_membership, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
         public async Task<Entries> DeltaAsync(string cursor = null, string locale = null, string path_prefix = null, bool include_media_info = false, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _requestExecuter.Execute<Entries>(() => _requestGenerator.Delta(cursor, locale, path_prefix, include_media_info, asTeamMember)).ConfigureAwait(false);
+            return await _requestExecuter.Execute<Entries>(() => _requestGenerator.Delta(cursor, locale, path_prefix, include_media_info, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
         public async Task<DeltaCursor> DeltaLatestCursorAsync(string path_prefix = null, bool include_media_info = false, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _requestExecuter.Execute<DeltaCursor>(() => _requestGenerator.DeltaLatestCursor(path_prefix, include_media_info, asTeamMember)).ConfigureAwait(false);
+            return await _requestExecuter.Execute<DeltaCursor>(() => _requestGenerator.DeltaLatestCursor(path_prefix, include_media_info, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
         public async Task<LongPollDelta> LongPollDeltaAsync(string cursor = null, int timeout = 30, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _requestExecuter.Execute<LongPollDelta>(() => _requestGenerator.LongPollDelta(cursor, timeout, asTeamMember)).ConfigureAwait(false);
+            return await _requestExecuter.Execute<LongPollDelta>(() => _requestGenerator.LongPollDelta(cursor, timeout, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<MetaData>> RevisionsAsync(string path, int rev_limit = 10, string locale = null, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _requestExecuter.Execute<IEnumerable<MetaData>>(() => _requestGenerator.Revisions(_options.Root, path, rev_limit, locale, asTeamMember)).ConfigureAwait(false);
+            return await _requestExecuter.Execute<IEnumerable<MetaData>>(() => _requestGenerator.Revisions(_options.Root, path, rev_limit, locale, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
         public async Task<MetaData> RestoreAsync(string path, string rev = null, string locale = null, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _requestExecuter.Execute<MetaData>(() => _requestGenerator.Restore(_options.Root, path, rev, locale, asTeamMember)).ConfigureAwait(false);
+            return await _requestExecuter.Execute<MetaData>(() => _requestGenerator.Restore(_options.Root, path, rev, locale, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<MetaData>> SearchAsync(string path, string query, int file_limit = 1000, bool include_deleted = false, string locale = null, bool include_membership = false, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _requestExecuter.Execute<IEnumerable<MetaData>>(() => _requestGenerator.Search(_options.Root, path, query, file_limit, include_deleted, locale, include_membership, asTeamMember)).ConfigureAwait(false);
+            return await _requestExecuter.Execute<IEnumerable<MetaData>>(() => _requestGenerator.Search(_options.Root, path, query, file_limit, include_deleted, locale, include_membership, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
         public async Task<SharedLink> SharesAsync(string path, string locale = null, bool short_url = true, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _requestExecuter.Execute<SharedLink>(() => _requestGenerator.Shares(_options.Root, path, locale, short_url, asTeamMember)).ConfigureAwait(false);
+            return await _requestExecuter.Execute<SharedLink>(() => _requestGenerator.Shares(_options.Root, path, locale, short_url, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
         public async Task<MediaLink> MediaAsync(string path, string locale = null, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _requestExecuter.Execute<MediaLink>(() => _requestGenerator.Media(_options.Root, path, locale, asTeamMember)).ConfigureAwait(false);
+            return await _requestExecuter.Execute<MediaLink>(() => _requestGenerator.Media(_options.Root, path, locale, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
         public async Task<CopyRef> CopyRefAsync(string path, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _requestExecuter.Execute<CopyRef>(() => _requestGenerator.Media(_options.Root, path, asTeamMember)).ConfigureAwait(false);
+            return await _requestExecuter.Execute<CopyRef>(() => _requestGenerator.Media(_options.Root, path, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
         public async Task<Stream> ThumbnailsAsync(string path, string format = "jpeg", string size = "s", string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var restResponse = await _requestExecuter.Execute(() => _requestGenerator.Thumbnails(_options.Root, path, format, size, asTeamMember)).ConfigureAwait(false);
+            var restResponse = await _requestExecuter.Execute(() => _requestGenerator.Thumbnails(_options.Root, path, format, size, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false);
 
             return await restResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
         }
 
         public async Task<Preview> PreviewsAsync(string path, string rev = null, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var restResponse = await _requestExecuter.Execute(() => _requestGenerator.Previews(Options.AutoRoot, path, rev, asTeamMember)).ConfigureAwait(false);
+            var restResponse = await _requestExecuter.Execute(() => _requestGenerator.Previews(Options.AutoRoot, path, rev, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false);
 
             var preview = new Preview
                 {
@@ -182,17 +182,17 @@ namespace DropboxRestAPI.Services.Core
 
         public async Task<ChunkedUpload> ChunkedUploadAsync(byte[] content, int count, string uploadId = null, long? offset = null, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _requestExecuter.Execute<ChunkedUpload>(() => _requestGenerator.ChunkedUpload(content, count, uploadId, offset, asTeamMember)).ConfigureAwait(false);
+            return await _requestExecuter.Execute<ChunkedUpload>(() => _requestGenerator.ChunkedUpload(content, count, uploadId, offset, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
         public async Task<MetaData> CommitChunkedUploadAsync(string path, string uploadId, string locale = null, bool overwrite = true, string parent_rev = null, bool autorename = true, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _requestExecuter.Execute<MetaData>(() => _requestGenerator.CommitChunkedUpload(_options.Root, path, uploadId, locale, overwrite, parent_rev, autorename, asTeamMember)).ConfigureAwait(false);
+            return await _requestExecuter.Execute<MetaData>(() => _requestGenerator.CommitChunkedUpload(_options.Root, path, uploadId, locale, overwrite, parent_rev, autorename, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<MetaData>> SharedFoldersAsync(string id = null, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _requestExecuter.Execute<IEnumerable<MetaData>>(() => _requestGenerator.SharedFolders(id, asTeamMember)).ConfigureAwait(false);
+            return await _requestExecuter.Execute<IEnumerable<MetaData>>(() => _requestGenerator.SharedFolders(id, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
         #endregion
