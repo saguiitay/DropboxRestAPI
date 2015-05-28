@@ -121,8 +121,7 @@ namespace DropboxRestAPI
                             };
                     }
                 }
-                if ((int)statusCode == 429)
-                    throw new RetryLaterException {RetryAfter = 10};
+                throw new RetryLaterException {RetryAfter = 10};
             }
             if ((int) statusCode == 507)
             {
