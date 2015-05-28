@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using DropboxRestAPI.Models.Core;
 
@@ -19,7 +20,8 @@ namespace DropboxRestAPI
         }
 
 
-        public async Task<MetaData> UploadFileStream(string path, string locale = null, bool overwrite = true, string parent_rev = null, bool autorename = true, string asTeamMember = null)
+        public async Task<MetaData> UploadFileStream(string path, string locale = null, bool overwrite = true, string parent_rev = null, bool autorename = true, string asTeamMember = null, 
+            CancellationToken cancellationToken = default(CancellationToken))
         {
             string uploadId = null;
             long currentPosition = 0;
@@ -32,9 +34,9 @@ namespace DropboxRestAPI
                 {
                     endPosition = _dataSource.Length;
                 }
-                var count = await _dataSource.ReadAsync(fragmentBuffer, 0, (int) Math.Max(0, endPosition - currentPosition)).ConfigureAwait(false);
+                var count = await _dataSource.ReadAsync(fragmentBuffer, 0, (int) Math.Max(0, endPosition - currentPosition), cancellationToken).ConfigureAwait(false);
 
-                var response = await _client.Core.Metadata.ChunkedUploadAsync(fragmentBuffer, count, uploadId, currentPosition, asTeamMember).ConfigureAwait(false);
+                var response = await _client.Core.Metadata.ChunkedUploadAsync(fragmentBuffer, count, uploadId, currentPosition, asTeamMember, cancellationToken).ConfigureAwait(false);
                 uploadId = response.upload_id;
 
                 currentPosition = endPosition;
@@ -43,7 +45,7 @@ namespace DropboxRestAPI
             if (uploadId == null)
                 return null;
 
-            var uploadedItem = await _client.Core.Metadata.CommitChunkedUploadAsync(path, uploadId, locale, overwrite, parent_rev, autorename, asTeamMember).ConfigureAwait(false);
+            var uploadedItem = await _client.Core.Metadata.CommitChunkedUploadAsync(path, uploadId, locale, overwrite, parent_rev, autorename, asTeamMember, cancellationToken).ConfigureAwait(false);
             return uploadedItem;
         }
     }
