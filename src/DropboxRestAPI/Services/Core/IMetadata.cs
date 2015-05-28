@@ -182,7 +182,7 @@ namespace DropboxRestAPI.Services.Core
         /// <param name="locale">The metadata returned will have its size field translated based on the given locale.</param>
         /// <param name="asTeamMember">Specify the member_id of the user that the app wants to act on.</param>
         /// <returns>A list of revisions.</returns>
-        Task<IEnumerable<Metadata>> RevisionsAsync(string path, int rev_limit = 10, string locale = null, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IEnumerable<MetaData>> RevisionsAsync(string path, int rev_limit = 10, string locale = null, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Restores a file path to a previous revision.
@@ -193,7 +193,7 @@ namespace DropboxRestAPI.Services.Core
         /// <param name="locale">The metadata returned will have its size field translated based on the given locale.</param>
         /// <param name="asTeamMember">Specify the member_id of the user that the app wants to act on.</param>
         /// <returns>The metadata of the restored file.</returns>
-        Task<Metadata> RestoreAsync(string path, string rev = null, string locale = null, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<MetaData> RestoreAsync(string path, string rev = null, string locale = null, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Returns metadata for all files and folders whose filename contains the given search string as a substring.

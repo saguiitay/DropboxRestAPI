@@ -131,14 +131,14 @@ namespace DropboxRestAPI.Services.Core
             return await _requestExecuter.Execute<LongPollDelta>(() => _requestGenerator.LongPollDelta(cursor, timeout, asTeamMember)).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<Metadata>> RevisionsAsync(string path, int rev_limit = 10, string locale = null, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<IEnumerable<MetaData>> RevisionsAsync(string path, int rev_limit = 10, string locale = null, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _requestExecuter.Execute<IEnumerable<Metadata>>(() => _requestGenerator.Revisions(_options.Root, path, rev_limit, locale, asTeamMember)).ConfigureAwait(false);
+            return await _requestExecuter.Execute<IEnumerable<MetaData>>(() => _requestGenerator.Revisions(_options.Root, path, rev_limit, locale, asTeamMember)).ConfigureAwait(false);
         }
 
-        public async Task<Metadata> RestoreAsync(string path, string rev = null, string locale = null, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<MetaData> RestoreAsync(string path, string rev = null, string locale = null, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _requestExecuter.Execute<Metadata>(() => _requestGenerator.Restore(_options.Root, path, rev, locale, asTeamMember)).ConfigureAwait(false);
+            return await _requestExecuter.Execute<MetaData>(() => _requestGenerator.Restore(_options.Root, path, rev, locale, asTeamMember)).ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<MetaData>> SearchAsync(string path, string query, int file_limit = 1000, bool include_deleted = false, string locale = null, bool include_membership = false, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken))
