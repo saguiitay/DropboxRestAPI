@@ -23,6 +23,7 @@
  */
 
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -82,19 +83,14 @@ namespace DropboxRestAPI.Services.Core
                 bool hasMore = true;
                 do
                 {
-                    long? from = read;
-                    long? to = read + _options.ChunkSize;
-                    if (to > length)
-                        to = length;
-                    if (from >= length)
-                        break;
-
-                    using (var restResponse2 = await  _requestExecuter.Execute(() => _requestGenerator.FilesRange(_options.Root, path, from.Value, to.Value - 1, etag, rev, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false))
+                    long from = read.Value;
+                    long to = read.Value + _options.ChunkSize;
+                    
+                    using (var restResponse2 = await  _requestExecuter.Execute(() => _requestGenerator.FilesRange(_options.Root, path, from, to - 1, etag, rev, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false))
                     {
                         await restResponse2.Content.CopyToAsync(targetStream).ConfigureAwait(false);
 
                         read += restResponse2.Content.Headers.ContentLength;
-                        
                         if (read >= length)
                             hasMore = false;
                         else if (restResponse2.StatusCode == HttpStatusCode.OK)
