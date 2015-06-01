@@ -24,6 +24,7 @@
 
 using System;
 using System.Linq;
+using System.Net;
 
 namespace DropboxRestAPI.Utils
 {
@@ -50,6 +51,12 @@ namespace DropboxRestAPI.Utils
                               select string.Format("{0}={1}", Uri.EscapeUriString(kvp.Key), Uri.EscapeDataString(kvp.Value)))
                 .ToArray();
             return (includePrefix ? "?" : "") + string.Join("&", array);
+        }
+
+        public static string EncodePathParts(this string path)
+        {
+            return string.Join("/", path.Split('/')
+                .Select(s => WebUtility.UrlEncode(s).Replace("+", "%20")));
         }
     }
 }

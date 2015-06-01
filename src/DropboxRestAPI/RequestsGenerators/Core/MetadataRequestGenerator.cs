@@ -23,9 +23,13 @@
  */
 
 
+using System;
 using System.IO;
+using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Web;
 using DropboxRestAPI.Utils;
 
 namespace DropboxRestAPI.RequestsGenerators.Core
@@ -37,7 +41,7 @@ namespace DropboxRestAPI.RequestsGenerators.Core
             var request = new Request
                 {
                     BaseAddress = Consts.ApiContentBaseUrl,
-                    Resource = Consts.Version + "/files/" + root + path,
+                    Resource = Consts.Version + "/files/" + root + path.EncodePathParts(),
                     Method = HttpMethod.Head
                 };
             request.AddHeader(Consts.AsTeamMemberHeader, asTeamMember);
@@ -53,7 +57,7 @@ namespace DropboxRestAPI.RequestsGenerators.Core
             var request = new Request
                 {
                     BaseAddress = Consts.ApiContentBaseUrl,
-                    Resource = Consts.Version + "/files/" + root + path,
+                    Resource = Consts.Version + "/files/" + root + path.EncodePathParts(),
                     Method = HttpMethod.Get
                 };
             request.AddHeader(Consts.AsTeamMemberHeader, asTeamMember);
@@ -75,7 +79,7 @@ namespace DropboxRestAPI.RequestsGenerators.Core
             var request = new Request
                 {
                     BaseAddress = Consts.ApiContentBaseUrl,
-                    Resource = Consts.Version + "/files_put/" + root + path,
+                    Resource = Consts.Version + "/files_put/" + root + path.EncodePathParts(),
                     Method = HttpMethod.Put
                 };
             request.AddHeader(Consts.AsTeamMemberHeader, asTeamMember);
@@ -102,7 +106,7 @@ namespace DropboxRestAPI.RequestsGenerators.Core
                 {
                     Method = HttpMethod.Get,
                     BaseAddress = Consts.ApiBaseUrl,
-                    Resource = Consts.Version + "/metadata/" + root + path
+                    Resource = Consts.Version + "/metadata/" + root + path.EncodePathParts()
                 };
             request.AddHeader(Consts.AsTeamMemberHeader, asTeamMember);
 
@@ -183,7 +187,7 @@ namespace DropboxRestAPI.RequestsGenerators.Core
             var request = new Request
                 {
                     BaseAddress = Consts.ApiBaseUrl,
-                    Resource = Consts.Version + "/revisions/" + root + path,
+                    Resource = Consts.Version + "/revisions/" + root + path.EncodePathParts(),
                     Method = HttpMethod.Get
                 };
             request.AddHeader(Consts.AsTeamMemberHeader, asTeamMember);
@@ -200,7 +204,7 @@ namespace DropboxRestAPI.RequestsGenerators.Core
             var request = new Request
                 {
                     BaseAddress = Consts.ApiBaseUrl,
-                    Resource = Consts.Version + "/restore/" + root + path,
+                    Resource = Consts.Version + "/restore/" + root + path.EncodePathParts(),
                     Method = HttpMethod.Post
                 };
             request.AddHeader(Consts.AsTeamMemberHeader, asTeamMember);
@@ -217,7 +221,7 @@ namespace DropboxRestAPI.RequestsGenerators.Core
             var request = new Request
                 {
                     BaseAddress = Consts.ApiBaseUrl,
-                    Resource = Consts.Version + "/search/" + root + path,
+                    Resource = Consts.Version + "/search/" + root + path.EncodePathParts(),
                     Method = HttpMethod.Get
                 };
             request.AddHeader(Consts.AsTeamMemberHeader, asTeamMember);
@@ -239,7 +243,7 @@ namespace DropboxRestAPI.RequestsGenerators.Core
             var request = new Request
                 {
                     BaseAddress = Consts.ApiBaseUrl,
-                    Resource = Consts.Version + "/shares/" + root + path,
+                    Resource = Consts.Version + "/shares/" + root + path.EncodePathParts(),
                     Method = HttpMethod.Post
                 };
             request.AddHeader(Consts.AsTeamMemberHeader, asTeamMember);
@@ -256,7 +260,7 @@ namespace DropboxRestAPI.RequestsGenerators.Core
             var request = new Request
                 {
                     BaseAddress = Consts.ApiBaseUrl,
-                    Resource = Consts.Version + "/media/" + root + path,
+                    Resource = Consts.Version + "/media/" + root + path.EncodePathParts(),
                     Method = HttpMethod.Post
                 };
             request.AddHeader(Consts.AsTeamMemberHeader, asTeamMember);
@@ -271,7 +275,7 @@ namespace DropboxRestAPI.RequestsGenerators.Core
             var request = new Request
                 {
                     BaseAddress = Consts.ApiBaseUrl,
-                    Resource = Consts.Version + "/copy_ref/" + root + path,
+                    Resource = Consts.Version + "/copy_ref/" + root + path.EncodePathParts(),
                     Method = HttpMethod.Get
                 };
             request.AddHeader(Consts.AsTeamMemberHeader, asTeamMember);
@@ -284,7 +288,7 @@ namespace DropboxRestAPI.RequestsGenerators.Core
             var request = new Request
                 {
                     BaseAddress = Consts.ApiContentBaseUrl,
-                    Resource = Consts.Version + "/thumbnails/" + root + path,
+                    Resource = Consts.Version + "/thumbnails/" + root + path.EncodePathParts(),
                     Method = HttpMethod.Get
                 };
             request.AddHeader(Consts.AsTeamMemberHeader, asTeamMember);
@@ -300,7 +304,7 @@ namespace DropboxRestAPI.RequestsGenerators.Core
             var request = new Request
                 {
                     BaseAddress = Consts.ApiContentBaseUrl,
-                    Resource = Consts.Version + "/previews/" + root + path,
+                    Resource = Consts.Version + "/previews/" + root + path.EncodePathParts(),
                     Method = HttpMethod.Get
                 };
             request.AddHeader(Consts.AsTeamMemberHeader, asTeamMember);
@@ -337,7 +341,7 @@ namespace DropboxRestAPI.RequestsGenerators.Core
             var request = new Request
                 {
                     BaseAddress = Consts.ApiContentBaseUrl,
-                    Resource = Consts.Version + "/commit_chunked_upload/" + root + path,
+                    Resource = Consts.Version + "/commit_chunked_upload/" + root + path.EncodePathParts(),
                     Method = HttpMethod.Post
                 };
             request.AddHeader(Consts.AsTeamMemberHeader, asTeamMember);
