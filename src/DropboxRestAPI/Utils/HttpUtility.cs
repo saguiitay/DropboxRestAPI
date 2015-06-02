@@ -55,7 +55,7 @@ namespace DropboxRestAPI.Utils
 
         public static string EncodePathParts(this string path)
         {
-            return string.Join("/", path.Split('/')
+            return string.Join("/", path.Split('/', '\\')
                 .Select(s => WebUtility.UrlEncode(s).Replace("+", "%20")));
         }
     }
