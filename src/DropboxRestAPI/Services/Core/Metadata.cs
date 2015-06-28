@@ -79,19 +79,19 @@ namespace DropboxRestAPI.Services.Core
                     etag = etags.FirstOrDefault();
 
 
-                long? read = 0;
+                long read = 0;
                 bool hasMore = true;
                 do
                 {
-                    long from = read.Value;
-                    long to = read.Value + _options.ChunkSize;
+                    long from = read;
+                    long to = read + _options.ChunkSize;
                     
                     using (var restResponse2 = await  _requestExecuter.Execute(() => _requestGenerator.FilesRange(_options.Root, path, from, to - 1, etag, rev, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false))
                     {
                         await restResponse2.Content.CopyToAsync(targetStream).ConfigureAwait(false);
 
-                        read += restResponse2.Content.Headers.ContentLength;
-                        if (read >= length)
+                        read += (restResponse2.Content.Headers.ContentLength ?? 0);
+                        if (length.HasValue && read >= length.Value)
                             hasMore = false;
                         else if (restResponse2.StatusCode == HttpStatusCode.OK)
                             hasMore = false;
