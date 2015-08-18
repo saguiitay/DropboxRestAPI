@@ -44,9 +44,9 @@ namespace DropboxRestAPI.RequestsGenerators.Core
             request.AddParameter("redirect_uri", redirect_uri);
             request.AddParameter("state", state);
             if (force_reapprove)
-                request.AddParameter("force_reapprove", true.ToString());
+                request.AddParameter("force_reapprove", "true");
             if (disable_signup)
-                request.AddParameter("disable_signup", true.ToString());
+                request.AddParameter("disable_signup", "true");
 
             return request;
         }
