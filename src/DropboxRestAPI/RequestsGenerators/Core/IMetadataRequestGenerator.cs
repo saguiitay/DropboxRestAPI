@@ -51,6 +51,6 @@ namespace DropboxRestAPI.RequestsGenerators.Core
         IRequest CommitChunkedUpload(string root, string path, string uploadId, string locale = null, bool overwrite = true, string parent_rev = null, bool autorename = true, string asTeamMember = null);
 
         IRequest SharedFolders(string id = null, string asTeamMember = null);
-
+        IRequest SaveUrl(string root, string path, string url);
     }
 }

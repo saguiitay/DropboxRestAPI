@@ -363,5 +363,15 @@ namespace DropboxRestAPI.Services.Core
         /// A list of shared folders metadata objects, or the metadata for a specific shared folder if the id parameter is specified.
         /// </returns>
         Task<IEnumerable<MetaData>> SharedFoldersAsync(string id = null, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Save a file from the speficied URL into Dropbox.  If the given paths already exists, the file will be be renamed to avoid the conflict (e.g. myfile (1).txt).
+        /// </summary>
+        /// <param name="path">The path in Dropbox where the file will be saved</param>
+        /// <param name="url">The URL to be fetched</param>
+        /// <returns>
+        /// A dictionary with a status and job. The status is as defined in the save_url_job documentation.  The job field gives a job ID that can be used with the save_url_job endpoint to check the job's status.
+        /// </returns>
+        Task<SaveUrl> SaveUrlAsync(string path, string url, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
