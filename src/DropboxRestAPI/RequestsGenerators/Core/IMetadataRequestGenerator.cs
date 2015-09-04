@@ -52,5 +52,6 @@ namespace DropboxRestAPI.RequestsGenerators.Core
 
         IRequest SharedFolders(string id = null, string asTeamMember = null);
         IRequest SaveUrl(string root, string path, string url);
+        IRequest SaveUrlJob(string jobId);
     }
 }

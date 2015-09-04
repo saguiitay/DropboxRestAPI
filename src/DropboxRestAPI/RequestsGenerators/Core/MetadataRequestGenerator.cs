@@ -369,11 +369,22 @@ namespace DropboxRestAPI.RequestsGenerators.Core
         {
             var request = new Request
             {
-                BaseAddress = Consts.ApiContentBaseUrl,
-                Resource = Consts.Version + "/Save_url/" + root + path.EncodePathParts(),
+                BaseAddress = Consts.ApiBaseUrl,
+                Resource = Consts.Version + "/save_url/" + root + path.EncodePathParts(),
                 Method = HttpMethod.Post
             };
             request.AddParameter("url", url);
+            return request;
+        }
+
+        public IRequest SaveUrlJob(string jobId)
+        {
+            var request = new Request
+            {
+                BaseAddress = Consts.ApiBaseUrl,
+                Resource = Consts.Version + "/save_url_job/" + jobId,
+                Method = HttpMethod.Get
+            };
             return request;
         }
     }

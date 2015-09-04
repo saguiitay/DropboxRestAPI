@@ -1,8 +1,8 @@
 namespace DropboxRestAPI.Models.Core
 {
-    public class SaveUrl
+    public class SaveUrlJob
     {
-        public string Job { get; set; }
         public SaveUrlStatus Status { get; set; }
+        public string Error { get; set; }
     }
 }
