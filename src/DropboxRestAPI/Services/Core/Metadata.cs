@@ -23,7 +23,6 @@
  */
 
 
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -194,14 +193,14 @@ namespace DropboxRestAPI.Services.Core
         }
 
 
-        public async Task<SaveUrl> SaveUrlAsync(string path, string url, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<SaveUrl> SaveUrlAsync(string path, string url, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _requestExecuter.Execute<SaveUrl>(() => _requestGenerator.SaveUrl(_options.Root, path, url), cancellationToken: cancellationToken).ConfigureAwait(false);
+            return await _requestExecuter.Execute<SaveUrl>(() => _requestGenerator.SaveUrl(_options.Root, path, url, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<SaveUrl> SaveUrlJobAsync(string jobId, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<SaveUrlJob> SaveUrlJobAsync(string jobId, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _requestExecuter.Execute<SaveUrl>(() => _requestGenerator.SaveUrlJob(jobId), cancellationToken: cancellationToken).ConfigureAwait(false);
+            return await _requestExecuter.Execute<SaveUrlJob>(() => _requestGenerator.SaveUrlJob(jobId, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         #endregion
     }

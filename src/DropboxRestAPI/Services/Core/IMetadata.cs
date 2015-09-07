@@ -372,7 +372,7 @@ namespace DropboxRestAPI.Services.Core
         /// <returns>
         /// A dictionary with a status and job. The status is as defined in the save_url_job documentation.  The job field gives a job ID that can be used with the save_url_job endpoint to check the job's status.
         /// </returns>
-        Task<SaveUrl> SaveUrlAsync(string path, string url, CancellationToken cancellationToken = default(CancellationToken));
+        Task<SaveUrl> SaveUrlAsync(string path, string url, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Check the status of a save URL job.
@@ -381,6 +381,6 @@ namespace DropboxRestAPI.Services.Core
         /// <returns>
         /// A dictionary with a status field with one of the following values: PENDING – The job has not yet started. DOWNLOADING – The job has started but hasn't yet completed. COMPLETE – The job is complete. FAILED – The job failed.An additional error field will describe the failure.
         /// </returns>
-        Task<SaveUrl> SaveUrlJobAsync(string jobId, CancellationToken cancellationToken = default(CancellationToken));
+        Task<SaveUrlJob> SaveUrlJobAsync(string jobId, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

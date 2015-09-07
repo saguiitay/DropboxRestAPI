@@ -365,26 +365,30 @@ namespace DropboxRestAPI.RequestsGenerators.Core
             return request;
         }
 
-        public IRequest SaveUrl(string root, string path, string url)
+        public IRequest SaveUrl(string root, string path, string url, string asTeamMember = null)
         {
             var request = new Request
-            {
-                BaseAddress = Consts.ApiBaseUrl,
-                Resource = Consts.Version + "/save_url/" + root + path.EncodePathParts(),
-                Method = HttpMethod.Post
-            };
+                {
+                    BaseAddress = Consts.ApiBaseUrl,
+                    Resource = Consts.Version + "/save_url/" + root + path.EncodePathParts(),
+                    Method = HttpMethod.Post
+                };
             request.AddParameter("url", url);
+            request.AddHeader(Consts.AsTeamMemberHeader, asTeamMember);
+
             return request;
         }
 
-        public IRequest SaveUrlJob(string jobId)
+        public IRequest SaveUrlJob(string jobId, string asTeamMember = null)
         {
             var request = new Request
-            {
-                BaseAddress = Consts.ApiBaseUrl,
-                Resource = Consts.Version + "/save_url_job/" + jobId,
-                Method = HttpMethod.Get
-            };
+                {
+                    BaseAddress = Consts.ApiBaseUrl,
+                    Resource = Consts.Version + "/save_url_job/" + jobId,
+                    Method = HttpMethod.Get
+                };
+            request.AddHeader(Consts.AsTeamMemberHeader, asTeamMember);
+
             return request;
         }
     }
