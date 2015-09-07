@@ -32,6 +32,9 @@ namespace DropboxRestAPI.Http
 {
     public class HttpClientFactory : IHttpClientFactory
     {
+        private TimeSpanSemaphore _readTimeSpanSemaphore;
+        private TimeSpanSemaphore _writeTimeSpanSemaphore;
+
         public HttpClient CreateHttpClient(HttpClientOptions options)
         {
             HttpMessageHandler handler = new HttpClientHandler {AllowAutoRedirect = options.AllowAutoRedirect};
@@ -46,12 +49,12 @@ namespace DropboxRestAPI.Http
             if (options.ReadRequestsPerSecond.HasValue)
             {
                 double delay = (1/options.ReadRequestsPerSecond.Value);
-                readTimeSpanSemaphore = new TimeSpanSemaphore(1, TimeSpan.FromSeconds(delay));
+                readTimeSpanSemaphore = (_readTimeSpanSemaphore ?? (_readTimeSpanSemaphore = new TimeSpanSemaphore(1, TimeSpan.FromSeconds(delay))));
             }
             if (options.WriteRequestsPerSecond.HasValue)
             {
                 double delay = (1/options.WriteRequestsPerSecond.Value);
-                writeTimeSpanSemaphore = new TimeSpanSemaphore(1, TimeSpan.FromSeconds(delay));
+                writeTimeSpanSemaphore = (_writeTimeSpanSemaphore ?? (_writeTimeSpanSemaphore = new TimeSpanSemaphore(1, TimeSpan.FromSeconds(delay))));
             }
 
             if (readTimeSpanSemaphore != null || writeTimeSpanSemaphore != null)
