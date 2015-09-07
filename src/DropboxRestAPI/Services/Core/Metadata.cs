@@ -193,6 +193,16 @@ namespace DropboxRestAPI.Services.Core
             return await _requestExecuter.Execute<IEnumerable<MetaData>>(() => _requestGenerator.SharedFolders(id, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
+
+        public async Task<SaveUrl> SaveUrlAsync(string path, string url, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return await _requestExecuter.Execute<SaveUrl>(() => _requestGenerator.SaveUrl(_options.Root, path, url), cancellationToken: cancellationToken).ConfigureAwait(false);
+        }
+
+        public async Task<SaveUrl> SaveUrlJobAsync(string jobId, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return await _requestExecuter.Execute<SaveUrl>(() => _requestGenerator.SaveUrlJob(jobId), cancellationToken: cancellationToken).ConfigureAwait(false);
+        }
         #endregion
     }
 }
