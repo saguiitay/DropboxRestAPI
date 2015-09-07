@@ -58,6 +58,9 @@
     <Compile Include="Models\Core\Membership.cs" />
     <Compile Include="Models\Core\Owner.cs" />
     <Compile Include="Models\Core\PhotoInfo.cs" />
+    <Compile Include="Models\Core\SaveUrl.cs" />
+    <Compile Include="Models\Core\SaveUrlJob.cs" />
+    <Compile Include="Models\Core\SaveUrlStatus.cs" />
     <Compile Include="Models\Core\SharedFolder.cs" />
     <Compile Include="Models\Core\User.cs" />
     <Compile Include="Models\Core\VideoInfo.cs" />
