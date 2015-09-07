@@ -58,5 +58,13 @@ namespace DropboxRestAPI.Utils
         public int HttpCode { get; private set; }
 
         public int? Attempts { get; set; }
+
+        public override string ToString()
+        {
+            var s = string.Format("HttpStatusCode: {0}", HttpCode);
+            s += Environment.NewLine + string.Format("Message: {0}", Message);
+            s += Environment.NewLine + base.ToString();
+            return s;
+        }
     }
 }
