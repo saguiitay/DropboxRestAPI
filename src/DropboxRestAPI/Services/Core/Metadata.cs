@@ -52,14 +52,17 @@ namespace DropboxRestAPI.Services.Core
 
         #region Implementation of IMetadata
 
-        public async Task<MetaData> FilesAsync(string path, Stream targetStream, string rev = null, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<MetaData> FilesAsync(string path, Stream targetStream, string rev = null,
+            string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             MetaData fileMetadata = null;
+            string etag = "";
+            long? length;
             using (var restResponse = await _requestExecuter.Execute(() => _requestGenerator.Files(_options.Root, path, rev, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false))
             {
                 await _requestExecuter.CheckForError(restResponse, false).ConfigureAwait(false);
 
-                long? length = restResponse.Content.Headers.ContentLength;
+                length = restResponse.Content.Headers.ContentLength;
                 if (length == null)
                 {
                     IEnumerable<string> metadatas;
@@ -73,32 +76,31 @@ namespace DropboxRestAPI.Services.Core
                         }
                     }
                 }
-                string etag = "";
                 IEnumerable<string> etags;
                 if (restResponse.Headers.TryGetValues("etag", out etags))
                     etag = etags.FirstOrDefault();
-
-
-                long read = 0;
-                bool hasMore = true;
-                do
-                {
-                    long from = read;
-                    long to = read + _options.ChunkSize;
-                    
-                    using (var restResponse2 = await  _requestExecuter.Execute(() => _requestGenerator.FilesRange(_options.Root, path, from, to - 1, etag, rev, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false))
-                    {
-                        await restResponse2.Content.CopyToAsync(targetStream).ConfigureAwait(false);
-
-                        read += (restResponse2.Content.Headers.ContentLength ?? 0);
-                        if (length.HasValue && read >= length.Value)
-                            hasMore = false;
-                        else if (restResponse2.StatusCode == HttpStatusCode.OK)
-                            hasMore = false;
-                    }
-                } while (hasMore);
-
             }
+
+            long read = 0;
+            bool hasMore = true;
+            do
+            {
+                long from = read;
+                long to = read + _options.ChunkSize;
+
+                using (var restResponse2 = await _requestExecuter.Execute(() => _requestGenerator.FilesRange(_options.Root, path, from, to - 1, etag, rev, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false))
+                {
+                    await restResponse2.Content.CopyToAsync(targetStream).ConfigureAwait(false);
+
+                    read += (restResponse2.Content.Headers.ContentLength ?? 0);
+                    if (length.HasValue && read >= length.Value)
+                        hasMore = false;
+                    else if (restResponse2.StatusCode == HttpStatusCode.OK)
+                        hasMore = false;
+                }
+            } while (hasMore);
+
+
             return fileMetadata;
         }
 
