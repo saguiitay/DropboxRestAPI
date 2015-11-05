@@ -63,9 +63,9 @@ namespace DropboxRestAPI
             throw new RetryLaterException();
         }
 
-        public Task<string> CheckForError(HttpResponseMessage httpResponse, bool readResponse = true)
+        public Task<string> CheckForError(HttpResponseMessage httpResponse, bool readResponse = true, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return _requestExecuter.CheckForError(httpResponse, readResponse);
+            return _requestExecuter.CheckForError(httpResponse, readResponse, cancellationToken);
             
         }
 

@@ -14,6 +14,6 @@ namespace DropboxRestAPI
 
         Task<T> Execute<T>(Func<IRequest> restRequest, HttpClient restClient = null, CancellationToken cancellationToken = default(CancellationToken));
 
-        Task<string> CheckForError(HttpResponseMessage httpResponse, bool readResponse = true);
+        Task<string> CheckForError(HttpResponseMessage httpResponse, bool readResponse = true, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

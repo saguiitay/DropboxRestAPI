@@ -23,10 +23,12 @@
  */
 
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using DropboxRestAPI.Models.Core;
@@ -59,7 +61,7 @@ namespace DropboxRestAPI.Services.Core
             long? length;
             using (var restResponse = await _requestExecuter.Execute(() => _requestGenerator.Files(_options.Root, path, rev, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false))
             {
-                await _requestExecuter.CheckForError(restResponse, false).ConfigureAwait(false);
+                await _requestExecuter.CheckForError(restResponse, false, cancellationToken).ConfigureAwait(false);
 
                 length = restResponse.Content.Headers.ContentLength;
                 if (length == null)
@@ -89,7 +91,21 @@ namespace DropboxRestAPI.Services.Core
 
                 using (var restResponse2 = await _requestExecuter.Execute(() => _requestGenerator.FilesRange(_options.Root, path, from, to - 1, etag, rev, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false))
                 {
-                    await restResponse2.Content.CopyToAsync(targetStream).ConfigureAwait(false);
+                    try
+                    {
+                        using (cancellationToken.Register(restResponse2.Dispose))
+                            await restResponse2.Content.CopyToAsync(targetStream).ConfigureAwait(false);
+                    }
+                    catch (HttpRequestException ex)
+                    {
+                        if (ex.InnerException != null && ex.InnerException is ObjectDisposedException)
+                            cancellationToken.ThrowIfCancellationRequested();
+                        throw;
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        cancellationToken.ThrowIfCancellationRequested();
+                    }
 
                     read += (restResponse2.Content.Headers.ContentLength ?? 0);
                     if (length.HasValue && read >= length.Value)

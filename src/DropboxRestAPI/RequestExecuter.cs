@@ -67,7 +67,7 @@ namespace DropboxRestAPI
                 try
                 {
                     restResponse = await restClient.Execute(request, cancellationToken).ConfigureAwait(false);
-                    await CheckForError(restResponse, false).ConfigureAwait(false);
+                    await CheckForError(restResponse, false, cancellationToken).ConfigureAwait(false);
                 }
                 catch (Exception)
                 {
@@ -89,7 +89,7 @@ namespace DropboxRestAPI
             using (IRequest request = restRequest())
             using (HttpResponseMessage restResponse = await restClient.Execute(request, cancellationToken).ConfigureAwait(false))
             {
-                string content = await CheckForError(restResponse).ConfigureAwait(false);
+                string content = await CheckForError(restResponse, cancellationToken: cancellationToken).ConfigureAwait(false);
 
                 var data = JsonConvert.DeserializeObject<T>(content);
 
@@ -97,13 +97,23 @@ namespace DropboxRestAPI
             }
         }
 
-        public async Task<string> CheckForError(HttpResponseMessage httpResponse, bool readResponse = true)
+        public async Task<string> CheckForError(HttpResponseMessage httpResponse, bool readResponse = true, CancellationToken cancellationToken = default(CancellationToken))
         {
             HttpStatusCode statusCode = httpResponse.StatusCode;
             string content = null;
 
             if (readResponse)
-                content = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            {
+                try
+                {
+                    using (cancellationToken.Register(httpResponse.Dispose))
+                        content = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                }
+                catch (ObjectDisposedException)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                }
+            }
 
             if (statusCode == 0)
                 throw new HttpException((int) statusCode, content) {Attempts = 1};
@@ -136,7 +146,17 @@ namespace DropboxRestAPI
 
                 // Force reading response content in order to retrieve the error message
                 if (!readResponse)
-                    content = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                {
+                    try
+                    {
+                        using (cancellationToken.Register(httpResponse.Dispose))
+                            content = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        cancellationToken.ThrowIfCancellationRequested();
+                    }
+                }
 
                 if (!string.IsNullOrEmpty(content))
                     errorInfo = JsonConvert.DeserializeObject<Error>(content);
