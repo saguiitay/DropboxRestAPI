@@ -1,4 +1,4 @@
-﻿/*
+/*
  * The MIT License (MIT)
  * 
  * Copyright (c) 2014 Itay Sagui
@@ -24,15 +24,21 @@
 
 namespace DropboxRestAPI.Models.Core
 {
-    public class SharedFolder
+    public class Group
     {
-        public string shared_folder_id { get; set; }
-        public string shared_folder_name { get; set; }
-        public string path { get; set; }
+        /// <summary>
+        /// The group's display name.
+        /// </summary>
+        public string display_name { get; set; }
+
+        /// <summary>
+        /// The group's id.
+        /// </summary>
+        public string id { get; set; }
+
+        public int member_count { get; set; }
+        public bool is_team_group { get; set; }
         public string access_type { get; set; }
-        public string shared_link_policy { get; set; }
-        public Membership[] membership { get; set; }
-        public Owner owner { get; set; }
-        public Groups[] groups { get; set; }
+        public bool same_team { get; set; }
     }
 }
