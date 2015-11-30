@@ -42,5 +42,13 @@ namespace DropboxRestAPI.Models.Core
         /// If the linked account is a member of a Dropbox for Business team, whether the user is on the same team as the linked account
         /// </summary>
         public bool same_team { get; set; }
+        /// <summary>
+        /// The user's email address.
+        /// </summary>
+        public string email { get; set; }
+        /// <summary>
+        /// If true, the user's email address has been verified to belong to that user.
+        /// </summary>
+        public bool email_verified { get; set; }
     }
 }
