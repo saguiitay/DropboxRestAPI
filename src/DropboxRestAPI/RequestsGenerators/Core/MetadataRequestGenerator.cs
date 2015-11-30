@@ -26,6 +26,7 @@
 using System.IO;
 using System.Net.Http;
 using DropboxRestAPI.Utils;
+using System;
 
 namespace DropboxRestAPI.RequestsGenerators.Core
 {
@@ -352,14 +353,21 @@ namespace DropboxRestAPI.RequestsGenerators.Core
             return request;
         }
 
-        public IRequest SharedFolders(string id = null, string asTeamMember = null)
+        public IRequest SharedFolders(string shared_folder_id = null, bool? include_membership = true, bool show_unmounted = false, string asTeamMember = null)
         {
+            if (shared_folder_id != null && include_membership == null)
+                throw new ArgumentException("'include_membership' is required if shared_folder_id is specified.", "include_membership");
+
             var request = new Request
                 {
                     BaseAddress = Consts.ApiBaseUrl,
-                    Resource = Consts.Version + "/shared_folders/" + id,
+                    Resource = Consts.Version + "/shared_folders/" + shared_folder_id,
                     Method = HttpMethod.Get
                 };
+            if (include_membership != null)
+                request.AddParameter("include_membership", include_membership.Value.ToString());
+            if (show_unmounted)
+                request.AddParameter("show_unmounted", true.ToString());
             request.AddHeader(Consts.AsTeamMemberHeader, asTeamMember);
 
             return request;

@@ -203,9 +203,9 @@ namespace DropboxRestAPI.Services.Core
             return await _requestExecuter.Execute<MetaData>(() => _requestGenerator.CommitChunkedUpload(_options.Root, path, uploadId, locale, overwrite, parent_rev, autorename, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<MetaData>> SharedFoldersAsync(string id = null, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<IEnumerable<MetaData>> SharedFoldersAsync(string shared_folder_id = null, bool? include_membership = true, bool show_unmounted = false, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _requestExecuter.Execute<IEnumerable<MetaData>>(() => _requestGenerator.SharedFolders(id, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false);
+            return await _requestExecuter.Execute<IEnumerable<MetaData>>(() => _requestGenerator.SharedFolders(shared_folder_id, include_membership, show_unmounted, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
 
