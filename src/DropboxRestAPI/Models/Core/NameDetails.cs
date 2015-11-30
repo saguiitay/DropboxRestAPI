@@ -25,19 +25,21 @@
 
 namespace DropboxRestAPI.Models.Core
 {
-    public class QuotaInfo
+    public class NameDetails
     {
         /// <summary>
-        /// The user's used quota in shared folders (bytes). If the user belongs to a team, this includes all usage contributed to the team's quota outside of the user's own used quota (bytes).
+        /// The user's given name.
         /// </summary>
-        public long shared { get; set; }
+        public string given_name { get; set; }
+
         /// <summary>
-        /// The user's total quota allocation (bytes). If the user belongs to a team, the team's total quota allocation (bytes).
+        /// The user's surname.
         /// </summary>
-        public long quota { get; set; }
+        public string surname { get; set; }
+
         /// <summary>
-        /// The user's used quota outside of shared folders (bytes).
+        /// The locale-dependent familiar name for the user.
         /// </summary>
-        public long normal { get; set; }
+        public string familiar_name { get; set; }
     }
 }

@@ -69,6 +69,7 @@
     <Compile Include="Models\Core\Group.cs" />
     <Compile Include="Models\Core\Groups.cs" />
     <Compile Include="Models\Core\Membership.cs" />
+    <Compile Include="Models\Core\NameDetails.cs" />
     <Compile Include="Models\Core\Owner.cs" />
     <Compile Include="Models\Core\PhotoInfo.cs" />
     <Compile Include="Models\Core\SaveUrl.cs" />

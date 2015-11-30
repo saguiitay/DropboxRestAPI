@@ -45,6 +45,14 @@ namespace DropboxRestAPI.Models.Core
         /// </summary>
         public string display_name { get; set; }
         /// <summary>
+        /// Locale preference set by the user (e.g. en-us).
+        /// </summary>
+        public string locale { get; set; }
+        /// <summary>
+        /// If true, there is a paired account associated with this user.
+        /// </summary>
+        public bool is_paired { get; set; }
+        /// <summary>
         /// The user's used quota details
         /// </summary>
         public QuotaInfo quota_info { get; set; }
@@ -56,5 +64,9 @@ namespace DropboxRestAPI.Models.Core
         /// If the user belongs to a team, contains team information. Otherwise, null.
         /// </summary>
         public AccountTeam team { get; set; }
+        /// <summary>
+        /// The user's name details
+        /// </summary>
+        public NameDetails name_details { get; set; }
     }
 }
