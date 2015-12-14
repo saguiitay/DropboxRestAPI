@@ -37,6 +37,7 @@ namespace DropboxRestAPI.Services.Core
         /// </summary>
         /// <param name="locale">Use to specify language settings for user error messages and other language specific text.</param>
         /// <param name="asTeamMember">Specify the member_id of the user that the app wants to act on.</param>
+        /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
         /// <returns>
         /// User account information.
         /// </returns>

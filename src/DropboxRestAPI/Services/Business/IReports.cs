@@ -44,6 +44,7 @@ namespace DropboxRestAPI.Services.Business
         /// </remarks>
         /// <param name="start_date">starting date (inclusive)</param>
         /// <param name="end_date">ending date (exclusive)</param>
+        /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
         /// <returns>
         /// Data about a team's storage usage. Each result is represented as an array ordered by date, where the first value
         /// corresponds to the data on the start_date. Each subsequent array value represents one day's data in that series.
@@ -62,6 +63,7 @@ namespace DropboxRestAPI.Services.Business
         /// </remarks>
         /// <param name="start_date">starting date (inclusive)</param>
         /// <param name="end_date">ending date (exclusive)</param>
+        /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
         /// <returns>
         /// Data about a team's user activity. Each result is represented as an array ordered by date, where the first value
         /// corresponds to the data on the start_date. Each subsequent array value represents one day's data in that series.
@@ -80,6 +82,7 @@ namespace DropboxRestAPI.Services.Business
         /// </remarks>
         /// <param name="start_date">starting date (inclusive)</param>
         /// <param name="end_date">ending date (exclusive)</param>
+        /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
         /// <returns>
         /// Data about a team's membership. Each result is represented as an array ordered by date, where the first value corresponds
         /// to the data on the start_date. Each subsequent array value represents one day's data in that series.
@@ -98,6 +101,7 @@ namespace DropboxRestAPI.Services.Business
         /// </remarks>
         /// <param name="start_date">starting date (inclusive)</param>
         /// <param name="end_date">ending date (exclusive)</param>
+        /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
         /// <returns>
         /// Data about a team's linked devices. Linked devices are those with a Dropbox client or mobile app installed and linked to
         /// a team member's Dropbox for Business account. Each result is represented as an array ordered by date, where the first

@@ -43,6 +43,7 @@ namespace DropboxRestAPI.Services.Business
         /// </summary>
         /// <param name="limit">number of results to return per call (default 1000, maximum 1000)</param>
         /// <param name="cursor">encoded value indicating from what point to get the next limit members</param>
+        /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
         /// <returns>A list of team members.</returns>
         Task<Models.Business.Members> GetMembersAsync(int limit = 1000, string cursor = null, CancellationToken cancellationToken = default(CancellationToken));
 
@@ -53,6 +54,7 @@ namespace DropboxRestAPI.Services.Business
         /// <param name="member_id">ID of member</param>
         /// <param name="email">email of member</param>
         /// <param name="external_id">external ID of member</param>
+        /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
         /// <returns>Information about a team member.</returns>
         Task<MemberInfo> GetMemberInfoAsync(string member_id = null, string email = null, string external_id = null, CancellationToken cancellationToken = default(CancellationToken));
 
@@ -63,6 +65,7 @@ namespace DropboxRestAPI.Services.Business
         /// <param name="member_ids">list of member IDs</param>
         /// <param name="emails">list of member emails</param>
         /// <param name="external_ids">list of external member IDs</param>
+        /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
         /// <returns>Information about multiple team members.</returns>
         Task<IEnumerable<MemberInfo>> GetMembersInfoBatchAsync(string[] member_ids = null, string[] emails = null, string[] external_ids = null, CancellationToken cancellationToken = default(CancellationToken));
     }

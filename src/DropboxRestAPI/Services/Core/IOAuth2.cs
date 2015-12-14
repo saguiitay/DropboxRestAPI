@@ -73,6 +73,7 @@ namespace DropboxRestAPI.Services.Core
         /// token once the user has authorized the app.
         /// </summary>
         /// <param name="code">The code acquired by directing users to /oauth2/authorize?response_type=code.</param>
+        /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
         /// <returns>
         /// An access token (access_token), token type (token_type), and Dropbox user ID (uid). The token type will always be "bearer".
         /// </returns>
