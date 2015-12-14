@@ -58,10 +58,15 @@ namespace DropboxRestAPI.Services.Core
         /// the authorization page will show a link to the Dropbox iOS app in the App Store. This is only intended for use when
         /// necessary for compliance with App Store policies.
         /// </param>
+        /// <param name="require_role">
+        /// If specified, the user will be asked to authorize with a particular type of Dropbox account, either work for a Dropbox for
+        /// Business account or personal for a personal account. Your app should still verify the type of Dropbox account after
+        /// authorization since the user could modify or remove the require_role parameter.
+        /// </param>
         /// <returns>
         /// Address to the web page that lets the user sign in to Dropbox and authorize your app
         /// </returns>
-        Task<Uri> AuthorizeAsync(string response_type, string state = null, bool force_reapprove = false, bool disable_signup = false, CancellationToken cancellationToken = default(CancellationToken));
+        Task<Uri> AuthorizeAsync(string response_type, string state = null, bool force_reapprove = false, bool disable_signup = false, string require_role = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// This endpoint only applies to apps using the authorization code flow. An app calls this endpoint to acquire a bearer

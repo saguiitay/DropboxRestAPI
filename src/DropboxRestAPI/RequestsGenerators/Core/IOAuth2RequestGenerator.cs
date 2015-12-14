@@ -29,7 +29,7 @@ namespace DropboxRestAPI.RequestsGenerators.Core
 {
     public interface IOAuth2RequestGenerator
     {
-        IRequest Authorize(string response_type, string client_id, string redirect_uri, string state = null, bool force_reapprove = false, bool disable_signup = false);
+        IRequest Authorize(string response_type, string client_id, string redirect_uri, string state = null, bool force_reapprove = false, bool disable_signup = false, string require_role = null);
         IRequest AccessToken(string clientId, string clientSecret, string callbackUrl, string authorizationCode);
     }
 }

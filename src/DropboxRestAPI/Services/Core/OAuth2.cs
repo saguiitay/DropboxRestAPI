@@ -46,9 +46,9 @@ namespace DropboxRestAPI.Services.Core
 
         #region Implementation of IOAuth2
 
-        public async Task<Uri> AuthorizeAsync(string response_type, string state = null, bool force_reapprove = false, bool disable_signup = false, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<Uri> AuthorizeAsync(string response_type, string state = null, bool force_reapprove = false, bool disable_signup = false, string require_role = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var request = _requestGenerator.Authorize(response_type, _options.ClientId, _options.RedirectUri, state, force_reapprove, disable_signup);
+            var request = _requestGenerator.Authorize(response_type, _options.ClientId, _options.RedirectUri, state, force_reapprove, disable_signup, require_role);
             return request.BuildUri();
         }
 
