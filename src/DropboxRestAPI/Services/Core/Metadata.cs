@@ -203,9 +203,15 @@ namespace DropboxRestAPI.Services.Core
             return await _requestExecuter.Execute<MetaData>(() => _requestGenerator.CommitChunkedUpload(_options.Root, path, uploadId, locale, overwrite, parent_rev, autorename, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<MetaData>> SharedFoldersAsync(string shared_folder_id = null, bool? include_membership = true, bool show_unmounted = false, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<SharedFolder> SharedFolderAsync(string shared_folder_id = null, bool? include_membership = true, bool show_unmounted = false, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _requestExecuter.Execute<IEnumerable<MetaData>>(() => _requestGenerator.SharedFolders(shared_folder_id, include_membership, show_unmounted, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false);
+            return await _requestExecuter.Execute<SharedFolder>(() => _requestGenerator.SharedFolders(shared_folder_id, include_membership, show_unmounted, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false);
+        }
+
+
+        public async Task<IEnumerable<SharedFolder>> SharedFoldersAsync(bool? include_membership = true, bool show_unmounted = false, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return await _requestExecuter.Execute<IEnumerable<SharedFolder>>(() => _requestGenerator.SharedFolders(null, include_membership, show_unmounted, asTeamMember), cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
 

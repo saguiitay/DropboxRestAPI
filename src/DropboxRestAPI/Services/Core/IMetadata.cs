@@ -355,7 +355,7 @@ namespace DropboxRestAPI.Services.Core
         Task<MetaData> CommitChunkedUploadAsync(string path, string uploadId, string locale = null, bool overwrite = true, string parent_rev = null, bool autorename = true, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
-        /// Returns a list of all shared folders the authenticated user has access to or metadata about a specific shared folder.
+        /// Returns metadata about a specific shared folder.
         /// </summary>
         /// <param name="shared_folder_id">The ID of a specific shared folder.</param>
         /// <param name="show_unmounted">
@@ -368,7 +368,7 @@ namespace DropboxRestAPI.Services.Core
         /// </param>
         /// <param name="asTeamMember">Specify the member_id of the user that the app wants to act on.</param>
         /// <returns>
-        /// A list of shared folders metadata objects, or the metadata for a specific shared folder if the id parameter is specified.
+        /// The metadata for a specific shared folder if the id parameter is specified.
         /// </returns>
         /// <remarks>
         /// Note that same_team is only present if the linked account is a member of a Dropbox for Business team, and member_id is only
@@ -379,7 +379,34 @@ namespace DropboxRestAPI.Services.Core
         /// The membership field only contains users who have joined the shared folder and does not include users who have been invited
         /// but have not accepted.When the active field is false, it means that a user has left a shared folder(but may still rejoin).
         /// </remarks>
-        Task<IEnumerable<MetaData>> SharedFoldersAsync(string shared_folder_id = null, bool? include_membership = true, bool show_unmounted = false, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<SharedFolder> SharedFolderAsync(string shared_folder_id = null, bool? include_membership = true, bool show_unmounted = false, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Returns a list of all shared folders the authenticated user has access to.
+        /// </summary>
+        /// <param name="show_unmounted">
+        /// Required if shared_folder_id is specified. If true, include a list of members and a list of
+        /// groups for the shared folder.
+        /// </param>
+        /// <param name="include_membership">
+        /// This value, either true or false(default), determines whether the returned list of shared
+        /// folders will include shared folders that the user has left (but may still rejoin).
+        /// </param>
+        /// <param name="asTeamMember">Specify the member_id of the user that the app wants to act on.</param>
+        /// <returns>
+        /// A list of shared folders metadata objects.
+        /// </returns>
+        /// <remarks>
+        /// Note that same_team is only present if the linked account is a member of a Dropbox for Business team, and member_id is only
+        /// present when this endpoint is called by a Dropbox for Business app and the user is on that team.
+        /// 
+        /// The path is None for shared folders that the user has left.
+        /// 
+        /// The membership field only contains users who have joined the shared folder and does not include users who have been invited
+        /// but have not accepted.When the active field is false, it means that a user has left a shared folder(but may still rejoin).
+        /// </remarks>
+        Task<IEnumerable<SharedFolder>> SharedFoldersAsync(bool? include_membership = true, bool show_unmounted = false, string asTeamMember = null, CancellationToken cancellationToken = default(CancellationToken));
+
 
         /// <summary>
         /// Save a file from the speficied URL into Dropbox.  If the given paths already exists, the file will be be renamed to avoid the conflict (e.g. myfile (1).txt).
