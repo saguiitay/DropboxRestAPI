@@ -66,7 +66,7 @@ namespace DropboxRestAPI.Services.Core
         /// <returns>
         /// Address to the web page that lets the user sign in to Dropbox and authorize your app
         /// </returns>
-        Task<Uri> AuthorizeAsync(string response_type, string state = null, bool force_reapprove = false, bool disable_signup = false, string require_role = null, CancellationToken cancellationToken = default(CancellationToken));
+        Uri Authorize(string response_type, string state = null, bool force_reapprove = false, bool disable_signup = false, string require_role = null);
 
         /// <summary>
         /// This endpoint only applies to apps using the authorization code flow. An app calls this endpoint to acquire a bearer
