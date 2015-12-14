@@ -27,6 +27,7 @@ namespace DropboxRestAPI.Models.Core
     public class SharedFolder
     {
         public string shared_folder_id { get; set; }
+        public bool is_team_only_shared_folder { get; set; }
         public string shared_folder_name { get; set; }
         public string path { get; set; }
         public string access_type { get; set; }
