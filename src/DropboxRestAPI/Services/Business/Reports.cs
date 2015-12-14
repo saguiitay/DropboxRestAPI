@@ -33,14 +33,12 @@ namespace DropboxRestAPI.Services.Business
 {
     public class Reports : IReports
     {
-        private readonly Options _options;
         private readonly IRequestExecuter _requestExecuter;
         private readonly IReportsRequestGenerator _requestGenerator;
 
-        public Reports(IRequestExecuter requestExecuter, IReportsRequestGenerator requestGenerator, Options options)
+        public Reports(IRequestExecuter requestExecuter, IReportsRequestGenerator requestGenerator)
         {
             _requestGenerator = requestGenerator;
-            _options = options;
             _requestExecuter = requestExecuter;
         }
 

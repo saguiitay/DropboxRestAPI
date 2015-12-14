@@ -32,14 +32,12 @@ namespace DropboxRestAPI.Services.Business
 {
     public class Members : IMembers
     {
-        private readonly Options _options;
         private readonly IRequestExecuter _requestExecuter;
         private readonly ITeamMembersRequestGenerator _requestGenerator;
 
-        public Members(IRequestExecuter requestExecuter, ITeamMembersRequestGenerator requestGenerator, Options options)
+        public Members(IRequestExecuter requestExecuter, ITeamMembersRequestGenerator requestGenerator)
         {
             _requestGenerator = requestGenerator;
-            _options = options;
             _requestExecuter = requestExecuter;
         }
 

@@ -29,12 +29,12 @@ namespace DropboxRestAPI.Services.Business
 {
     public class Business : IBusiness
     {
-        public Business(IRequestExecuter requestExecuter, IRequestGenerator requestGenerator, Options options)
+        public Business(IRequestExecuter requestExecuter, IRequestGenerator requestGenerator)
         {
-            Info = new Info(requestExecuter, requestGenerator.Business.TeamInfo, options);
-            Members = new Members(requestExecuter, requestGenerator.Business.TeamMembers, options);
-            Reports = new Reports(requestExecuter, requestGenerator.Business.Reports, options);
-            AuditLog = new AuditLog(requestExecuter, requestGenerator.Business.AuditLog, options);
+            Info = new Info(requestExecuter, requestGenerator.Business.TeamInfo);
+            Members = new Members(requestExecuter, requestGenerator.Business.TeamMembers);
+            Reports = new Reports(requestExecuter, requestGenerator.Business.Reports);
+            AuditLog = new AuditLog(requestExecuter, requestGenerator.Business.AuditLog);
         }
 
         public IInfo Info { get; set; }

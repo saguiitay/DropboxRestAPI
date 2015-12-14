@@ -63,7 +63,7 @@ namespace DropboxRestAPI
             RequestGenerator = requestGenerator;
 
             Core = new Core(requestExecuter, requestGenerator.Core, options);
-            Business = new Business(requestExecuter, requestGenerator, options);
+            Business = new Business(requestExecuter, requestGenerator);
         }
 
         public IRequestGenerator RequestGenerator { get; private set; }
