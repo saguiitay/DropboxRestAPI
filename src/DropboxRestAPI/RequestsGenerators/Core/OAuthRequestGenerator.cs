@@ -30,7 +30,7 @@ namespace DropboxRestAPI.RequestsGenerators.Core
 {
     public class OAuth2RequestGenerator : IOAuth2RequestGenerator
     {
-        public IRequest Authorize(string response_type, string client_id, string redirect_uri, string state = null, bool force_reapprove = false, bool disable_signup = false)
+        public IRequest Authorize(string response_type, string client_id, string redirect_uri, string state = null, bool force_reapprove = false, bool disable_signup = false, string require_role = null)
         {
             var request = new Request
             {
@@ -42,6 +42,7 @@ namespace DropboxRestAPI.RequestsGenerators.Core
             request.AddParameter("response_type", response_type);
             request.AddParameter("client_id", client_id);
             request.AddParameter("redirect_uri", redirect_uri);
+            request.AddParameter("require_role", require_role);
             request.AddParameter("state", state);
             if (force_reapprove)
                 request.AddParameter("force_reapprove", "true");
