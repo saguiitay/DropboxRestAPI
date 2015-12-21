@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>DropboxRestAPI</id>
-    <version>1.2.0</version>
+    <version>1.2.1</version>
     <title>DropboxRestAPI</title>
     <description>DropboxRestAPI is a C# client for Dropbox service through its RESTful API.</description>
     <authors>saguiitay</authors>
