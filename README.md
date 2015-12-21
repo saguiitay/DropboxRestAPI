@@ -23,7 +23,15 @@ You can contact me on twitter [@saguiitay](https://twitter.com/saguiitay).
 DropboxRestAPI is available as a [NuGet package](https://www.nuget.org/packages/DropboxRestAPI)
 
 ## Release Notes
-
++ **1.2.1**   Added support for the Business [Group Info](https://www.dropbox.com/developers-v1/business/docs#groups-list) endpoint.
++ **1.2.0**   Fixed SharedFolder methods.
+              Breaking Changes:
+  + Authorize is no longer an async method
+  + Split SharedFolders method into two methods `SharedFolders` and `SharedFolder`
++ **1.1.8**   Added some fields to account information. Added support for groups in SharedFolder.
++ **1.1.7**   Improved handling of cancellation tokens.
++ **1.1.6**   Fixed usage of SaveUrlJobAsync. Memory/Performance improvements.
++ **1.0.5**   Fixed usage of 'cursor' parameter. Added support for SharedFolder information.
 + **1.0.5**   Fixed usage of 'cursor' parameter. Added support for SharedFolder information.
 + **1.0.4**   Fixed issues with downloading of large files.
 + **1.0.3**   Fixed issues with downloading of zero-bytes files.
