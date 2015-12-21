@@ -54,6 +54,9 @@
     <Compile Include="LargeFileUploader.cs" />
     <Compile Include="Models\Business\Event.cs" />
     <Compile Include="Models\Business\EventInfo.cs" />
+    <Compile Include="Models\Business\GroupInfo.cs" />
+    <Compile Include="Models\Business\GroupMember.cs" />
+    <Compile Include="Models\Business\GroupsInfo.cs" />
     <Compile Include="Models\Core\DeltaCursor.cs" />
     <Compile Include="Models\Core\Group.cs" />
     <Compile Include="Models\Core\Groups.cs" />
@@ -69,7 +72,9 @@
     <Compile Include="Models\Core\VideoInfo.cs" />
     <Compile Include="Models\Core\Token.cs" />
     <Compile Include="RequestsGenerators\Business\BusinessRequestGenerator.cs" />
+    <Compile Include="RequestsGenerators\Business\GroupsRequestGenerator.cs" />
     <Compile Include="RequestsGenerators\Business\IBusinessRequestGenerator.cs" />
+    <Compile Include="RequestsGenerators\Business\IGroupsRequestGenerator.cs" />
     <Compile Include="RequestsGenerators\Core\AccountsRequestGenerator.cs" />
     <Compile Include="RequestsGenerators\Consts.cs" />
     <Compile Include="RequestsGenerators\Core\CoreRequestGenerator.cs" />
@@ -79,6 +84,8 @@
     <Compile Include="RequestsGenerators\Core\MetadataRequestGenerator.cs" />
     <Compile Include="RequestsGenerators\Core\IOAuth2RequestGenerator.cs" />
     <Compile Include="RequestsGenerators\Core\OAuthRequestGenerator.cs" />
+    <Compile Include="Services\Business\Groups.cs" />
+    <Compile Include="Services\Business\IGroups.cs" />
     <Compile Include="Services\Core\Accounts.cs" />
     <Compile Include="Models\Core\Entries.cs" />
     <Compile Include="Models\Core\CopyRef.cs" />
@@ -157,6 +164,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestsGenerators\RequestGenerator.cs" />
     <Compile Include="Utils\TupleStringMetadataConverter.cs" />
+    <Compile Include="Utils\UnixEpochDateTimeConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
