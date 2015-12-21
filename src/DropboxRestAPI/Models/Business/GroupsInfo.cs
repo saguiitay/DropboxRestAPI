@@ -22,15 +22,12 @@
  * SOFTWARE.
  */
 
+using System;
 
-namespace DropboxRestAPI.Services.Business
+namespace DropboxRestAPI.Models.Business
 {
-    public interface IBusiness
+    public class GroupsInfo
     {
-        IInfo Info { get; set; }
-        IMembers Members { get; set; }
-        IReports Reports { get; set; }
-        IAuditLog AuditLog { get; set; }
-        IGroups Groups { get; set; }
+        public GroupInfo[] groups { get; set; }
     }
 }

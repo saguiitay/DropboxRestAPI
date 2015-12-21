@@ -32,6 +32,7 @@ namespace DropboxRestAPI.Models.Business
         public string status { get; set; }
         public string member_id { get; set; }
         public string email { get; set; }
+        public bool email_verified { get; set; }
         public string external_id { get; set; }
         public string[] groups { get; set; }
     }

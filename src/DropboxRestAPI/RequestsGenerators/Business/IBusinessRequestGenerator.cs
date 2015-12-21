@@ -31,5 +31,6 @@ namespace DropboxRestAPI.RequestsGenerators.Business
         ITeamMembersRequestGenerator TeamMembers { get;  }
         IReportsRequestGenerator Reports { get;  }
         IAuditLogRequestGenerator AuditLog { get;  }
+        IGroupsRequestGenerator Groups { get; }
     }
 }

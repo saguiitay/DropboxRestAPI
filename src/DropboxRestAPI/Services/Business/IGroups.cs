@@ -23,14 +23,26 @@
  */
 
 
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using DropboxRestAPI.Models.Business;
+
 namespace DropboxRestAPI.Services.Business
 {
-    public interface IBusiness
+    public interface IGroups
     {
-        IInfo Info { get; set; }
-        IMembers Members { get; set; }
-        IReports Reports { get; set; }
-        IAuditLog AuditLog { get; set; }
-        IGroups Groups { get; set; }
+        /// <summary>
+        /// Retrieves information about a team.
+        /// </summary>
+        /// <returns>Information about a team.</returns>
+        Task<GroupsInfo> GetInfoAsync(IEnumerable<string> group_ids, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Lists members of a team.
+        /// </summary>
+        /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
+        /// <returns>A list of team members.</returns>
+        Task<GroupsInfo> ListAsync(CancellationToken cancellationToken = default(CancellationToken));
     }
 }

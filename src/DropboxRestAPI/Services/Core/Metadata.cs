@@ -108,7 +108,7 @@ namespace DropboxRestAPI.Services.Core
                     }
 
                     read += (restResponse2.Content.Headers.ContentLength ?? 0);
-                    if (length.HasValue && read >= length.Value)
+                    if (length.HasValue && read >= length.GetValueOrDefault())
                         hasMore = false;
                     else if (restResponse2.StatusCode == HttpStatusCode.OK)
                         hasMore = false;

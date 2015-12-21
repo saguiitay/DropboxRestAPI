@@ -23,34 +23,41 @@
  */
 
 
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using DropboxRestAPI.Utils;
+
 namespace DropboxRestAPI.RequestsGenerators.Business
 {
-    public class BusinessRequestGenerator : IBusinessRequestGenerator
+    public class GroupsRequestGenerator : IGroupsRequestGenerator
     {
-        public BusinessRequestGenerator()
-            : this(new TeamInfoRequestGenerator(), new TeamMembersRequestGenerator(), new ReportsRequestGenerator(), 
-                  new AuditLogRequestGenerator(), new GroupsRequestGenerator())
+        public IRequest GetInfoAsync(IEnumerable<string> group_ids)
         {
+            var request = new Request
+                {
+                    Method = HttpMethod.Post,
+                    BaseAddress = Consts.ApiBaseUrl,
+                    Resource = Consts.Version + "/team/groups/get_info"
+                };
+            request.Content = new JsonContent(new { group_ids });
+            request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            return request;
         }
 
-        public BusinessRequestGenerator(ITeamInfoRequestGenerator teamInfo, ITeamMembersRequestGenerator teamMembers, 
-            IReportsRequestGenerator reports, IAuditLogRequestGenerator auditLog, IGroupsRequestGenerator groups)
+        public IRequest ListAsync()
         {
-            TeamInfo = teamInfo;
-            TeamMembers = teamMembers;
-            Reports = reports;
-            AuditLog = auditLog;
-            Groups = groups;
+            var request = new Request
+                {
+                    Method = HttpMethod.Post,
+                    BaseAddress = Consts.ApiBaseUrl,
+                    Resource = Consts.Version + "/team/groups/list"
+                };
+            request.Content = new JsonContent(new { });
+            request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            return request;
         }
-
-        #region Implementation of IBusinessRequestGenerator
-
-        public ITeamInfoRequestGenerator TeamInfo { get; private set; }
-        public ITeamMembersRequestGenerator TeamMembers { get; private set; }
-        public IReportsRequestGenerator Reports { get; private set; }
-        public IAuditLogRequestGenerator AuditLog { get; private set; }
-        public IGroupsRequestGenerator Groups { get; private set; }
-
-        #endregion
     }
 }

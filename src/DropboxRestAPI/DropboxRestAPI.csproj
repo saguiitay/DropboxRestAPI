@@ -65,6 +65,9 @@
     <Compile Include="LargeFileUploader.cs" />
     <Compile Include="Models\Business\Event.cs" />
     <Compile Include="Models\Business\EventInfo.cs" />
+    <Compile Include="Models\Business\GroupsInfo.cs" />
+    <Compile Include="Models\Business\GroupInfo.cs" />
+    <Compile Include="Models\Business\GroupMember.cs" />
     <Compile Include="Models\Core\DeltaCursor.cs" />
     <Compile Include="Models\Core\Group.cs" />
     <Compile Include="Models\Core\Groups.cs" />
@@ -77,6 +80,11 @@
     <Compile Include="Models\Core\SaveUrlStatus.cs" />
     <Compile Include="Models\Core\SharedFolder.cs" />
     <Compile Include="Models\Core\User.cs" />
+    <Compile Include="RequestsGenerators\Business\GroupsRequestGenerator.cs" />
+    <Compile Include="Services\Business\Groups.cs" />
+    <Compile Include="Services\Business\IGroups.cs" />
+    <Compile Include="RequestsGenerators\Business\IGroupsRequestGenerator.cs" />
+    <Compile Include="Utils\UnixEpochDateTimeConverter.cs" />
     <Compile Include="Utils\TupleStringMetadataConverter.cs" />
     <Compile Include="Models\Core\VideoInfo.cs" />
     <Compile Include="Models\Core\Token.cs" />

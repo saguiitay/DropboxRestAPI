@@ -23,14 +23,34 @@
  */
 
 
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using DropboxRestAPI.Models.Business;
+using DropboxRestAPI.RequestsGenerators.Business;
+
 namespace DropboxRestAPI.Services.Business
 {
-    public interface IBusiness
+    public class Groups : IGroups
     {
-        IInfo Info { get; set; }
-        IMembers Members { get; set; }
-        IReports Reports { get; set; }
-        IAuditLog AuditLog { get; set; }
-        IGroups Groups { get; set; }
+        private readonly IRequestExecuter _requestExecuter;
+        private readonly IGroupsRequestGenerator _requestGenerator;
+
+        public Groups(IRequestExecuter requestExecuter, IGroupsRequestGenerator requestGenerator)
+        {
+            _requestGenerator = requestGenerator;
+            _requestExecuter = requestExecuter;
+        }
+
+
+        public async Task<GroupsInfo> GetInfoAsync(IEnumerable<string> group_ids, CancellationToken cancellationToken = new CancellationToken())
+        {
+            return await _requestExecuter.Execute<GroupsInfo>(() => _requestGenerator.GetInfoAsync(group_ids), cancellationToken: cancellationToken).ConfigureAwait(false);
+        }
+
+        public async Task<GroupsInfo> ListAsync(CancellationToken cancellationToken = new CancellationToken())
+        {
+            return await _requestExecuter.Execute<GroupsInfo>(() => _requestGenerator.ListAsync(), cancellationToken: cancellationToken).ConfigureAwait(false);
+        }
     }
 }

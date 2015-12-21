@@ -35,11 +35,13 @@ namespace DropboxRestAPI.Services.Business
             Members = new Members(requestExecuter, requestGenerator.Business.TeamMembers);
             Reports = new Reports(requestExecuter, requestGenerator.Business.Reports);
             AuditLog = new AuditLog(requestExecuter, requestGenerator.Business.AuditLog);
+            Groups = new Groups(requestExecuter, requestGenerator.Business.Groups);
         }
 
         public IInfo Info { get; set; }
         public IMembers Members { get; set; }
         public IReports Reports { get; set; }
         public IAuditLog AuditLog { get; set; }
+        public IGroups Groups { get; set; }
     }
 }

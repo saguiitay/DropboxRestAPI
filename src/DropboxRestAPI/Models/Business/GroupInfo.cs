@@ -22,15 +22,29 @@
  * SOFTWARE.
  */
 
+using System;
+using DropboxRestAPI.Utils;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
-namespace DropboxRestAPI.Services.Business
+namespace DropboxRestAPI.Models.Business
 {
-    public interface IBusiness
+    public class GroupInfo
     {
-        IInfo Info { get; set; }
-        IMembers Members { get; set; }
-        IReports Reports { get; set; }
-        IAuditLog AuditLog { get; set; }
-        IGroups Groups { get; set; }
+        /// <summary>
+        /// The group's display name.
+        /// </summary>
+        public string group_name { get; set; }
+
+        /// <summary>
+        /// The group's id.
+        /// </summary>
+        public string group_id { get; set; }
+
+        public int num_members { get; set; }
+        public GroupMember[] members { get; set; }
+
+        [JsonConverter(typeof(UnixEpochDateTimeConverter))]
+        public DateTime created { get; set; }
     }
 }

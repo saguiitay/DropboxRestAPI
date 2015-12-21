@@ -23,34 +23,15 @@
  */
 
 
+using System.Collections.Generic;
+using DropboxRestAPI.Utils;
+using Newtonsoft.Json.Linq;
+
 namespace DropboxRestAPI.RequestsGenerators.Business
 {
-    public class BusinessRequestGenerator : IBusinessRequestGenerator
+    public interface IGroupsRequestGenerator
     {
-        public BusinessRequestGenerator()
-            : this(new TeamInfoRequestGenerator(), new TeamMembersRequestGenerator(), new ReportsRequestGenerator(), 
-                  new AuditLogRequestGenerator(), new GroupsRequestGenerator())
-        {
-        }
-
-        public BusinessRequestGenerator(ITeamInfoRequestGenerator teamInfo, ITeamMembersRequestGenerator teamMembers, 
-            IReportsRequestGenerator reports, IAuditLogRequestGenerator auditLog, IGroupsRequestGenerator groups)
-        {
-            TeamInfo = teamInfo;
-            TeamMembers = teamMembers;
-            Reports = reports;
-            AuditLog = auditLog;
-            Groups = groups;
-        }
-
-        #region Implementation of IBusinessRequestGenerator
-
-        public ITeamInfoRequestGenerator TeamInfo { get; private set; }
-        public ITeamMembersRequestGenerator TeamMembers { get; private set; }
-        public IReportsRequestGenerator Reports { get; private set; }
-        public IAuditLogRequestGenerator AuditLog { get; private set; }
-        public IGroupsRequestGenerator Groups { get; private set; }
-
-        #endregion
+        IRequest GetInfoAsync(IEnumerable<string> group_ids);
+        IRequest ListAsync();
     }
 }
